@@ -1,1 +1,0 @@
-# Offsec Proving Grounds Writeups
