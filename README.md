@@ -4,12 +4,14 @@
 
 I am a cybersecurity enthusiast focused on penetration testing, vulnerability analysis, and OSCP-style methodology.
 
+
 This repository serves as:
 
 	• A structured portfolio of penetration testing writeups 
 	• Documentation of my learning progress in offensive security 
 	• Evidence of practical, hands-on cybersecurity skills 
 	• A demonstration of OSCP-aligned methodology and thinking 
+	
 
 🧭 Methodology:
 
@@ -21,6 +23,7 @@ All assessments and labs in this repository follow a structured penetration test
 	5. Post-Exploitation Analysis 
 	6. Remediation Recommendations 
 This aligns with OSCP-style methodology and real-world penetration testing workflows.
+
 
 ⚠️ Disclaimer:
 
