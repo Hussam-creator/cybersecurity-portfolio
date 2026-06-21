@@ -2,16 +2,12 @@
 
 I am a cybersecurity enthusiast focused on penetration testing, vulnerability analysis, and OSCP-style methodology.
 
-<br><br>
-
 ## 📌 This repository serves as:
 
 * A structured portfolio of penetration testing writeups
 * Documentation of my learning progress in offensive security
 * Evidence of practical, hands-on cybersecurity skills
 * A demonstration of OSCP-aligned methodology and thinking
-
-<br><br>
 
 ## 🧭 Methodology
 
@@ -26,8 +22,6 @@ All assessments and labs in this repository follow a structured penetration test
 
 This aligns with OSCP-style methodology and real-world penetration testing workflows.
 
-<br><br>
-
 ## ⚠️ Disclaimer
 
 All work in this repository is performed in legal, controlled environments such as:
@@ -36,4 +30,5 @@ All work in this repository is performed in legal, controlled environments such 
 * OffSec Proving Grounds
 
 No unauthorized testing has been performed on real-world systems.
+
 
