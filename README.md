@@ -2,7 +2,7 @@
 
 I am a cybersecurity enthusiast focused on penetration testing, vulnerability analysis, and OSCP-style methodology.
 
-<br>
+<br><br>
 
 ## 📌 This repository serves as:
 
@@ -11,7 +11,7 @@ I am a cybersecurity enthusiast focused on penetration testing, vulnerability an
 * Evidence of practical, hands-on cybersecurity skills
 * A demonstration of OSCP-aligned methodology and thinking
 
-<br>
+<br><br>
 
 ## 🧭 Methodology
 
@@ -26,7 +26,7 @@ All assessments and labs in this repository follow a structured penetration test
 
 This aligns with OSCP-style methodology and real-world penetration testing workflows.
 
-<br>
+<br><br>
 
 ## ⚠️ Disclaimer
 
