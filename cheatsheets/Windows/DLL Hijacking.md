@@ -5,7 +5,8 @@ Get-ItemProperty "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Un
 ```
 Then check if we have write permissions, either using icacls or writing to it 
 Use 'Process Monitor' to check all DLLs loaded for the service and any missing ones. We can hijack them or create our own in place of the missing. 
-![[Pasted image 20260417164415.png]]
+
+![DLL](../Images/DLL.png)
 
 Use the bin icon to clear current logs, then locate a DLL and directory to upload
 ```shell
