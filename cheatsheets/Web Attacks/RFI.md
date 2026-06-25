@@ -3,16 +3,19 @@ Remote File Inclusion
 
 The **allow_url_include** and **allow_url_fopen** option needs to be enabled for this attack to work 
 - we can check for this in phpinfo.php
-![[Pasted image 20260414200002.png]]
+  
+![allow-url-open](../Images/allow-url.png)
 
 
 If the URL contains a page parameter, we can try this exploit
-![[Pasted image 20260414200014.png]]
+
+![url-page-parameter](../Images/url-parameter.png)
 
 - also parameters such as; file=, lang=, view, load=, mod=
 
 The 'include(test)' or a require() with this error message is a classic RFI target
-![[Pasted image 20260414200029.png]]
+
+![RFI-error](../Images/error-messages.png)
 
 We can upload webshells with this vulnerability and get command execution
 Find php webshells in the **/usr/share/webshells/php** directory 
