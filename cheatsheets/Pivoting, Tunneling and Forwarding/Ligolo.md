@@ -1,33 +1,34 @@
 
-![[Pasted image 20260415115032.png]]
+![ligolo-setup](../Images/ligolo-setup.png)
 
 ```
 ./proxy -selfcert
 ```
-![[Pasted image 20260415115043.png]]
+![ligolo1](../Images/ligolo1.png)
 
 On pivot machine
 ```
 .\agent.exe -connect 192.168.141.128:11601 -ignore-cert
 ```
-![[Pasted image 20260415115118.png]]
+![ligolo2](../Images/ligolo2.png)
 
 On proxy
-![[Pasted image 20260415115135.png]]
+
+![ligolo3](../Images/ligolo3.png)
 
 On kali
 Select session
 ```
 session
 ```
-![[Pasted image 20260415115149.png]]
+![ligolo4](../Images/ligolo4.png)
 
 Setup pivot
 Add to our outing table
 ```
 sudo ip route add 192.168.141.0/24 dev ligolo
 ```
-![[Pasted image 20260415115202.png]]
+![ligolo5](../Images/ligolo5.png)
 
 For double pivot
 -> Add a second TUN interface
