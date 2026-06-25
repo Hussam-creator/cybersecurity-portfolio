@@ -80,7 +80,7 @@ Runas
 runas /user:[domain\user] cmd.exe
 ```
 
-![[Pasted image 20260417164926.png]]
+![whoami](../Images/whoami.png)
 
 If we have access as nt authority/local service we can get more permissions with FullPowers.exe
 
