@@ -76,7 +76,8 @@ sudo LD_PRELOAD=/tmp/root.so /usr/sbin/apache2 restart
 ```
 
 If cat or command is not found
-![[Pasted image 20260416131200.png]]
+
+![enumeration](../Images/enumeration.png)
 
 Compiling File
 ```
