@@ -48,13 +48,4 @@ sudo neo4j start
 bloodhound-start
 ```
 
-Config File:
-sudo nano /etc/bhapi/bhapi.json
-
-neo4j
-1234
-
-admin
-869523471Hs!
-
 Run again after getting elevated privileges 
