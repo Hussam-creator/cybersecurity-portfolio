@@ -15,7 +15,7 @@ If the URL contains a page parameter, we can try this exploit
 
 The 'include(test)' or a require() with this error message is a classic RFI target
 
-![RFI-error](../Images/error-messages.png)
+![RFI-error](../Images/error-message.png)
 
 We can upload webshells with this vulnerability and get command execution
 Find php webshells in the **/usr/share/webshells/php** directory 
