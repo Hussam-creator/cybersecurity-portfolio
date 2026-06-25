@@ -5,7 +5,7 @@ Sudo
 ```
 sudo -l
 ```
-![symbolic-link](symbolic-link.png)
+![symbolic-link](../Images/symbolic-link.png)
 
 Reading the script shows that we can create a symbolic link from any file (/root/.ssh/id_rsa) to a png file 
 However we cannot create a direct link as it will be blocked so we create a chain instead. 
