@@ -14,7 +14,7 @@ curl -s http://drupal-acc.inlanefreight.local/CHANGELOG.txt | grep -m2 ""
 RCE
 Drupal <8
 Login in as admin and enable PHP filter module 
-![Drupal Module](cybersecurity-portfolio/cheatsheets/Images/Pasted image 20260413143909.png)
+![Drupal Module](../Images/Pasted image 20260413143909.png)
 Then navigate to Content > Add Content and create a basic page 
 ```
 <?php
