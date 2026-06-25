@@ -8,12 +8,13 @@ User enumeration
 ```
 finger @10.129.25.121
 ```
-![[Pasted image 20260427194703.png]]
+![finger1](../Images/finger1.png)
 
 ```
 finger root@10.129.25.121
 ```
-![[Pasted image 20260427194720.png]]
+![finger2](../Images/finger2.png)
+
 - To see what a valid response would look like 
 
 Installing finger-user-enum.pl a user enumeration tool from pentest monkey
@@ -28,7 +29,7 @@ Using the names.txt wordlist from seclist as we do not have any usernames to go 
 ```
 ./finger-user-enum.pl -U /usr/share/seclists/Usernames/Names/names.txt -t 10.129.25.121
 ```
-![[Pasted image 20260427194737.png]]
+![finger3](../Images/finger3.png)
 
 We have found 3 users, root, sammy and sunny 
 
