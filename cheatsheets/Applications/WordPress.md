@@ -7,9 +7,12 @@ wpscan --url http://site.com/wordpress --api-token <your_token> --enumerate u,vp
 Plugins stored in wp-content/plugins. These stored in wp-content/themes
 
 Valid Username but invalid password
-![[Pasted image 20260413145117.png]]
+
+![valid](../Images/valid-username.png)
+
 Invalid Username
-![[Pasted image 20260413145128.png]]
+
+![invalid](../Images/invalid-username.png)
 
 Brute Force Login
 ```
