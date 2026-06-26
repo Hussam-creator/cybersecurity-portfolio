@@ -159,6 +159,8 @@ This revealed that the user can run '/usr/sbin/nginx' with elevated privileges.
 
 After further enumeration a vulnerability was found that allowed a custom configuration file to be loaded with elevated privileges. 
 
+
 The exploit enabled WebDAV and exposed the filesystem,, allowing arbitrary file write. This was then leveraged to add a SSH public key resulting in root access via SSH.
+
 
 Exploit source: https://gist.github.com/DylanGrl/ab497e2f01c7d672a80ab9561a903406
