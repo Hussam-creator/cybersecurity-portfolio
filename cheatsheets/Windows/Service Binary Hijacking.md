@@ -1,4 +1,10 @@
+# Binary Hijacking
 
+## Overview
+
+During Windows service enumeration, it is important to check whether service binaries are located in writable directories or have weak file permissions. If a service runs with elevated privileges and its binary can be replaced or modified, it may be possible to execute arbitrary code when the service is restarted. This is a common privilege escalation path in misconfigured environments.
+
+---
 Installed Applications
 ```
 Get-ItemProperty "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*" | select displayname
