@@ -1,3 +1,10 @@
+# Credential Dumps
+
+## Overview
+
+Credential dumping involves extracting authentication material such as passwords, password hashes, and Kerberos tickets from compromised systems. Attackers commonly target memory, security databases, and cached credentials to obtain information that can be used to authenticate to other systems within the domain. During an Active Directory assessment, credential dumping can reveal privileged accounts and provide opportunities for lateral movement and privilege escalation.
+
+---
 DCSync
 ---
 
