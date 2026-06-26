@@ -1,4 +1,10 @@
+# SQL Server Administration
 
+## Overview
+
+Microsoft SQL Server instances often contain sensitive data and may be integrated with Active Directory through service accounts and delegated permissions. Misconfigurations or excessive privileges assigned to SQL Server administrators can provide opportunities for lateral movement and privilege escalation. During an assessment, enumerating SQL Server instances and administrative access can reveal additional attack paths, particularly where database servers are running with highly privileged domain accounts.
+
+---
 We may find a user with sysadmin privileges on a SQL server. We can use another custom query in BloodHound to find access
 
 ```
