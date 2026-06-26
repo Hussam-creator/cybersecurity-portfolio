@@ -1,4 +1,10 @@
+# Drupal
 
+## Overview
+
+During web application enumeration, it is important to identify the underlying content management system and its version, as different CMS platforms expose distinct attack surfaces. Drupal, in particular, may expose sensitive functionality through misconfigured modules, outdated core versions, or improperly secured administrative interfaces. Older versions have been associated with critical vulnerabilities, including remote code execution through vulnerable modules or PHP execution features when misconfigured.
+
+---
 droopescan
 ```
 sudo pip3 install droopescan
