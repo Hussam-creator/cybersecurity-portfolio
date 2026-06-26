@@ -1,4 +1,10 @@
+# Scheduled Tasks
 
+## Overview
+
+During post-exploitation, it is important to inspect scheduled tasks as they may execute scripts or binaries at regular intervals or system events. If these tasks reference files in writable locations or execute with elevated privileges, they may be abused to execute malicious code. Scheduled tasks can also reveal useful information about system administration and automation processes.
+
+---
 Enumerating Tasks
 ```
 schtasks /query /fo LIST /v
