@@ -1,3 +1,10 @@
+# TCP 21 (FTP)
+
+## Overview
+
+During service enumeration, port 21 is used for FTP, which allows file transfers between client and server. If anonymous access is enabled or weak credentials are used, it may allow unauthorised file access or upload capabilities. FTP services are often checked for misconfigurations, exposed backups, or sensitive configuration files.
+
+---
 ```
 nc [target IP] [port]
 ```
