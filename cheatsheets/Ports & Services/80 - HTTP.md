@@ -1,5 +1,10 @@
+# TCP 80 (HTTP)
 
+## Overview
 
+During web application enumeration, port 80 is used for HTTP services that host websites and web applications. It is often the primary attack surface for identifying vulnerabilities such as misconfigurations, outdated software, and insecure input handling. Enumeration typically focuses on identifying technologies, directories, and application functionality.
+
+---
 Requests & Responses
 GET - getting info from web server
 POST - for submitting data to a web server
