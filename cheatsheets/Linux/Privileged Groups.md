@@ -1,4 +1,10 @@
+# Privileged Groups
 
+## Overview
+
+During Linux enumeration, it is important to review group memberships assigned to the current user, as certain groups may grant elevated access to system resources. The groups mentioned can sometimes be leveraged to gain higher privileges depending on system configuration and mismanagement. Understanding group privileges is key to identifying indirect escalation paths.
+
+---
 ```
 id
 ```
