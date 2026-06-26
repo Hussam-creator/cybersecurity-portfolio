@@ -34,6 +34,6 @@ This environment exists solely for educational and research purposes. All testin
 
 | Machine | Role | Operating System |
 |----------|-------|------------------|
-| DC01 | Domain Controller | Windows Server 2022 |
-| WIN10-01 | Workstation | Windows 10 |
+| DC01 | Domain Controller | Windows Server 2019 |
+| WIN10-01 | Workstation | Windows 11 |
 | KALI | Attacker Machine | Kali Linux |
