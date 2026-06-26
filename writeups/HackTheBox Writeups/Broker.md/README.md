@@ -123,3 +123,10 @@ Once we are authenticated, we are take to the welcome page for ActiveMQ. The top
 
 ![home](Images/home.png)
 ![admin](Images/version.png)
+
+The target is running Apache ActiveMQ version 5.15.15. This version is affected by CVE-2023-46604, which can be leverage to achive remote code execution. A public exploit was found that generates a pseudo shell due to the unsafe deserialization within the OpenWire protocol.
+
+<https://github.com/duck-sec/CVE-2023-46604-ActiveMQ-RCE-pseudoshell/blob/master/README.md>
+
+### Exploitation
+
