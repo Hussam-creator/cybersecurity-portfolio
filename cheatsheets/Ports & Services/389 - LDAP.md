@@ -1,4 +1,10 @@
+# TCP 389 (LDAP)
 
+## Overview
+
+During directory service enumeration, port 389 is used for LDAP, which is commonly associated with Active Directory environments. It allows querying of users, groups, and domain information. If anonymous binding is enabled or weak credentials are used, it can provide valuable information for further domain enumeration and attack path discovery.
+
+---
 ```
 nmap -n -sV --script "ldap* and not brute" [target IP]
 ```
