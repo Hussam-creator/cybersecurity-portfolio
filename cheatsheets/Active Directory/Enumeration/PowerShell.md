@@ -1,4 +1,10 @@
+# PowerShell
 
+## Overview
+
+PowerShell is a powerful scripting and automation framework built into Windows that is widely used during Active Directory assessments. It provides native access to system administration and directory management functions, allowing testers to perform enumeration, execute scripts, and interact with domain resources without requiring additional tools. Due to its flexibility and integration with Windows environments, PowerShell is commonly used to automate reconnaissance tasks and support further stages of an engagement.
+
+---
 ```
 Import-Module ActiveDirectory
 ```
