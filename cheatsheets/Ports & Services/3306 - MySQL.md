@@ -1,4 +1,10 @@
+# TCP 3306 (MySQL)
 
+## Overview
+
+During database enumeration, port 3306 is associated with MySQL and is commonly found in web application backends. If exposed or weakly secured, it may allow authentication attempts and access to stored application data. In some cases, database access can also reveal credentials for other services or systems.
+
+---
 Linux
 ```
 mysql -u username -pPassword123 -h 10.129.20.13
