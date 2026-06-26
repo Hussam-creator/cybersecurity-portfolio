@@ -153,7 +153,7 @@ As part of my post-exploitation methodology, sudo privileges were reviewd to ide
 ```
 sudo -l
 ```
-This revealed that the user can run '/usr/sbin/nginx' with elevated privileges.
+This revealed that the user can run `/usr/sbin/nginx` with elevated privileges.
 
 ![sudo](Images/sudo.png)
 
