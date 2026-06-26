@@ -1,3 +1,10 @@
+# Kerberos Attacks
+
+## Overview
+
+Kerberos attacks target weaknesses in the Kerberos authentication protocol used by Active Directory. Common techniques involve abusing service tickets, account configurations, or delegated privileges to obtain credentials or impersonate other users. These attacks can enable privilege escalation, lateral movement, and, in some cases, complete domain compromise, making Kerberos security a critical area of focus during an assessment.
+
+---
 AS-REP ROASTING
 ---
 If we have a list of valid users we can try and get hashes
