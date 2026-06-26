@@ -1,4 +1,10 @@
+# Symbolic Link
 
+## Overview
+
+During Linux privilege escalation, it is important to consider how symbolic links may be used to redirect file access or manipulate privileged processes. If a privileged service follows symbolic links without proper validation, it may be possible to trick it into interacting with sensitive files or executing unintended actions. This can sometimes be used to escalate privileges depending on system context and permission
+
+---
 Example from LinkVortex (HTB):
 
 Sudo 
