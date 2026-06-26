@@ -1,4 +1,10 @@
+# Tomcat 
 
+## Overview
+
+During web server enumeration, it is important to identify Apache Tomcat installations, as misconfigurations and default deployments may expose administrative interfaces and deployment functionality. Tomcat servers may allow access to manager panels, application deployment endpoints, or sample applications that can be leveraged for remote code execution. Weak credentials or exposed management interfaces significantly increase the risk of compromise.
+
+---
 Find Version
 ```
 curl -s http://app-dev.inlanefreight.local:8080/docs/ | grep Tomcat
