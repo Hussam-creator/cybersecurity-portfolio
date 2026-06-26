@@ -1,4 +1,10 @@
+# Enumeration 
 
+## Overview
+
+During initial access on Linux systems, it is important to perform thorough enumeration to understand the environment, user context, running services, and potential privilege escalation paths. This includes identifying system information, kernel version, installed software, running processes, and misconfigurations. Effective enumeration is the foundation for discovering weaknesses that can be leveraged for privilege escalation.
+
+---
 Things to check for;
 - OS and kernel version for exploits
 - List current processes 
