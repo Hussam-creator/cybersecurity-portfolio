@@ -116,3 +116,10 @@ Navigating to port 80 issues us with a login prompt
 ![login](Images/login.png)
 
 Trying the credentials we found earlier (admin:admin) was successful, we were also able to confirm the default credentials through a google search 
+
+![creds](Images/default-creds.png)
+
+Once we are authenticated, we are take to the welcome page for ActiveMQ. The top link 'Manage ActiveMQ broker' instantly grabbed my attention. This link reveals the /admin endpoint which reveals further confirms our previous findings relating to the version of the service running. 
+
+![home](Images/home.png)
+![admin](Images/version.png)
