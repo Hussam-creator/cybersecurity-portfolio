@@ -1,4 +1,10 @@
+# WordPress
 
+## Overview
+
+During web application enumeration, it is important to identify WordPress installations and associated plugins and themes, as these significantly expand the attack surface. WordPress vulnerabilities often arise from outdated plugins, weak administrative credentials, or misconfigured file upload functionality. Enumerating version information, installed plugins, and exposed endpoints can provide valuable insight into potential exploitation opportunities.
+
+---
 wpscan
 ```
 wpscan --url http://site.com/wordpress --api-token <your_token> --enumerate u,vp --plugins-detection aggressive
