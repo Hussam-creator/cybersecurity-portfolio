@@ -173,7 +173,7 @@ chmod +x exploit.sh
 ./exploit.sh
 ```
 ![ssh](Images/ssh.png)
-- ensuring to leave the prompts for 'file save' and 'password' blank
+- Ensuring to leave the prompts for 'file save' and 'password' blank
 
 Once successfully executed, store the generated private key and assign it the appropriate permissions to enable SSH for root access
 
