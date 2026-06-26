@@ -1,4 +1,10 @@
+# File Upload Vulnerabilities
 
+## Overview
+
+File upload functionality should be assessed to determine whether user-supplied files are validated securely before being stored or processed by the server. Weak validation may allow attackers to upload malicious files, such as web shells or scripts, leading to remote code execution or sensitive file disclosure. Testing typically involves examining file type restrictions, content validation, filename handling, upload locations, and whether uploaded files are executable.
+
+---
 1) Check Allowed File Types    
 Upload a test file:  
 - test.jpg  
