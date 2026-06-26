@@ -1,4 +1,10 @@
+# TCP 25 (SMTP)
 
+# Overview
+
+During mail service enumeration, port 25 is used for SMTP, which handles email delivery between servers. It can sometimes be used to identify valid users or email addresses depending on server configuration. Misconfigurations may also allow email relay abuse or information disclosure during enumeration.
+
+---
 Use telnet to interact with the server
 ```
 telnet 10.129.14.128 25
