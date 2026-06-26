@@ -1,4 +1,10 @@
+# Insecure File Permissions 
 
+## Overview
+
+Writable configuration files, scripts, directories, or system binaries can sometimes be modified by non-privileged users. If these files are executed or used by privileged processes, they may provide a path to privilege escalation.
+
+---
 Writing to /etc/passwd
 ```
 openssl passwd -1 -salt aaa password1
