@@ -70,5 +70,35 @@ PORT      STATE SERVICE    VERSION
 61616/tcp open  apachemq   ActiveMQ OpenWire transport 5.15.15
 2 services unrecognized despite returning data. If you know the service/version, please submit the following fingerprints at https://nmap.org/cgi-bin/submit.cgi?new-service :
 ```
-                                                              
-                                                              
+Key Findings:
+- Port 22 - SSH
+- Port 80 - HTTP (nginx)
+- Port 61616 - HTTP (ActiveMQ)
+
+Upon discovering open web application ports I run a Nikto scan 
+```
+nikto -h 10.129.230.87
+```
+```
+- Nikto v2.5.0
+---------------------------------------------------------------------------
++ Target IP:          10.129.230.87
++ Target Hostname:    10.129.230.87
++ Target Port:        80
++ Start Time:         2026-04-19 15:15:19 (GMT1)
+---------------------------------------------------------------------------
++ Server: nginx/1.18.0 (Ubuntu)
++ /: The anti-clickjacking X-Frame-Options header is not present. See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options
++ /: The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type. See: https://www.netsparker.com/web-vulnerability-scanner/vulnerabilities/missing-content-type-header/
++ / - Requires Authentication for realm 'ActiveMQRealm'
++ /: Default account found for 'ActiveMQRealm' at (ID 'admin', PW 'admin'). Generic account discovered.. See: CWE-16
++ Root page / redirects to: http://10.129.230.87/index.html
++ No CGI Directories found (use '-C all' to force check all possible dirs)
++ nginx/1.18.0 appears to be outdated (current is at least 1.20.1).
++ /admin/: This might be interesting.
++ /admin/login.html: Admin login page/section found.
++ 8129 requests: 0 error(s) and 6 item(s) reported on remote host
++ End Time:           2026-04-19 15:17:35 (GMT1) (136 seconds)
+---------------------------------------------------------------------------
++ 1 host(s) tested
+```                                                       
