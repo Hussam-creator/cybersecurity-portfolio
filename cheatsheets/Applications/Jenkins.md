@@ -1,4 +1,10 @@
+# Jenkins
 
+## Overview
+
+During enumeration, Jenkins instances are important to identify because they often sit inside internal networks and handle automated builds and deployments. These systems can expose sensitive information such as credentials, source code, and deployment scripts. If improperly secured, features like the script console or exposed job configurations can sometimes be abused to execute commands on the underlying host.
+
+---
 Has often weak credentials or no authentication at all
 
 Script Console RCE
