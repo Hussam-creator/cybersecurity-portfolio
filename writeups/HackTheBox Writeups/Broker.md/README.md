@@ -177,7 +177,7 @@ chmod +x exploit.sh
 
 Once successfully executed, store the generated private key and assign it the appropriate permissions to enable SSH for root access
 
-![key](Images/key.png)
+![key](Images/ssh-key.png)
 
 ```
 chmod 600 key
