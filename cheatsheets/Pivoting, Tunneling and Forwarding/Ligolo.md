@@ -1,4 +1,10 @@
+# Ligolo
 
+## Overview
+
+During post-exploitation and pivoting, Ligolo is used to establish a lightweight tunnelling connection into internal networks through a compromised host. It is particularly useful in scenarios where traditional VPN-style access is not available. Once a tunnel is established, it allows an attacker to route traffic through the compromised machine and interact with internal services as if they were directly connected to the network.
+
+---
 ![ligolo-setup](../Images/ligolo-setup.png)
 
 ```
