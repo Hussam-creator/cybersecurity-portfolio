@@ -1,5 +1,10 @@
+# Unquoted Service Paths
 
+## Overview
 
+During service enumeration, it is important to identify services whose executable paths are not properly quoted. If a service path contains spaces and is unquoted, Windows may attempt to execute binaries in unintended locations, potentially allowing privilege escalation if a malicious executable is placed in a writable directory along the path.
+
+---
 We can find unquoted paths with the command below;
 ```
 wmic service get name,pathname |  findstr /i /v "C:\Windows\\" | findstr /i /v ""
