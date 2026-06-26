@@ -1,6 +1,6 @@
 # Remote File Inclusion (RFI)
 
-# Overview
+## Overview
 
 Remote File Inclusion (RFI) occurs when a web application accepts a user-supplied URL and includes its contents without proper validation. If remote file inclusion is enabled, an attacker may be able to execute malicious code hosted on an external server, potentially resulting in complete server compromise.
 
