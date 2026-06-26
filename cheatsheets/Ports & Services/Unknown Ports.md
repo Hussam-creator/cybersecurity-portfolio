@@ -12,7 +12,7 @@ http://IP:PORT
 https://IP:PORT
 ```
 
-or try connecting with netcat (you may get direct terminal access the run cmd 'help')
+or try connecting with netcat (you may get direct terminal access then run cmd 'help')
 ```
 nc IP PORT
 ```
