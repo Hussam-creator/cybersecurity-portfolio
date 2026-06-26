@@ -1,4 +1,10 @@
+# TCP 79 (Finger)
 
+## Overview 
+
+Port 79 is used for the Finger protocol, a legacy service that provides information about users on a system. If enabled, it may disclose usernames, login status, home directories, shell information, or other account details. During enumeration, a Finger service can help identify valid user accounts and gather information useful for further reconnaissance or authentication-based attacks, particularly on older or misconfigured systems.
+
+---
 A protocol that returns information about logged on users such as usernames, real names, home directories and shell information
 
 We can exploit through user enumeration, information disclosure and system reconnaissance 
