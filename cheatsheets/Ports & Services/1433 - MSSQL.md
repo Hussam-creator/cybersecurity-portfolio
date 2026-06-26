@@ -1,4 +1,10 @@
+# TCP 1433 (MSSQL)
 
+## Overview
+
+During database enumeration, port 1433 is associated with Microsoft SQL Server and is commonly found in internal Windows environments. If exposed or weakly secured, it may allow authentication attempts against database accounts and potential access to sensitive data. In some cases, misconfigurations such as elevated privileges or enabled dangerous procedures can lead to command execution on the underlying host.
+
+---
 Linux
 ```
 sqsh -S 10.129.20.13 -U username -P Password123
