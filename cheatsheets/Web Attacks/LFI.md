@@ -1,4 +1,10 @@
+# Local File Inclusion (LFI)
 
+#Overview
+
+Local File Inclusion (LFI) vulnerabilities occur when a web application allows user-controlled input to reference files on the local filesystem without sufficient validation. Successful exploitation can expose sensitive files such as configuration files, source code, or credentials. In some cases, LFI can be leveraged to achieve remote code execution through techniques such as log poisoning or file upload abuse. Testing for LFI involves identifying file inclusion parameters and attempting path traversal to access files outside the intended directory.
+
+---
 Use cURL to identify directory traversal vulnerability and find a file we can poison
 also parameters such as; file=, lang=, view=, load=, mod=, include=, template=
 
