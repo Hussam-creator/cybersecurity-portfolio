@@ -1,4 +1,10 @@
+# BloodHound
 
+## Overview
+
+BloodHound is a graphical enumeration tool used during Active Directory assessments to map relationships between users, groups, computers, and permissions within a domain. By collecting and analysing AD data, it helps identify attack paths that could allow an attacker to escalate privileges or move laterally through the environment. BloodHound is particularly valuable for uncovering misconfigurations, excessive permissions, and indirect paths to high-value targets such as Domain Administrators.
+
+---
 Windows Collector
 ----
 Upload SharpHound.ps1
