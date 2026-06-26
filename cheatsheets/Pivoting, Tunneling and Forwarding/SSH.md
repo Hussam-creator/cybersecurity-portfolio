@@ -1,5 +1,11 @@
+# SSH
 
+## Overview
+
+During internal network assessment, SSH is often used not only for remote access but also for tunnelling traffic between systems. If valid credentials or keys are obtained, SSH can provide a stable and encrypted channel into a target environment. It is also commonly used for local and remote port forwarding, allowing access to otherwise restricted internal services through a compromised host.
 Local Port Forward
+
+---
 For when we need to access a specific port
 ```
 ssh -L 1234:localhost:3306 ubuntu@10.129.202.64
