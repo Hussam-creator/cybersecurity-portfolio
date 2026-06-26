@@ -1,4 +1,10 @@
+# Group Privileges
 
+## Overview
+
+During Windows privilege enumeration, it is important to review the user’s group memberships to understand what level of access they already have. Certain privileged groups may allow actions such as service management, user creation, or system configuration changes. Misuse of these privileges can sometimes lead directly to privilege escalation without requiring a traditional exploit.
+
+---
 Backup Operators
 ---
 If privilege is assigned but not enabled
