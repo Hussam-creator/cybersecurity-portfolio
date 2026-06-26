@@ -1,4 +1,10 @@
+# Certficate Attacks
 
+## Overview
+
+Certificate attacks target weaknesses within Active Directory Certificate Services (AD CS) and its configuration. Misconfigured certificate templates or overly permissive enrolment settings can allow attackers to request certificates on behalf of other users or obtain certificates that provide elevated privileges. These attacks are particularly significant because they can lead to persistent access, privilege escalation, and even full domain compromise if certificate services are not properly secured.
+
+---
 If the compromised machine is a certificate authority 
 ![[Pasted image 20250804212831.png]]
 - An example 
