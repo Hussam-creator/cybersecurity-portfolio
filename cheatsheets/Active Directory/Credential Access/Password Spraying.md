@@ -1,4 +1,10 @@
+# Password Spraying 
 
+## Overview
+
+Password spraying is an authentication attack that attempts a small number of commonly used passwords against a large number of user accounts. Unlike traditional brute-force attacks that target a single account, password spraying reduces the likelihood of triggering account lockout policies. During an Active Directory assessment, this technique can be used to identify weak passwords or password reuse and accounts that may provide initial access or opportunities for privilege escalation.
+
+---
 Linux
 ---
 
