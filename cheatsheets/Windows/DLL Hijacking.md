@@ -1,4 +1,10 @@
+# DLL Hijacking
 
+## Overview
+
+During application and service enumeration on Windows systems, it is important to check for insecure DLL loading behaviour. If an application attempts to load a missing DLL from a writable directory, it may be possible to place a malicious DLL that is executed with the privileges of the application. This technique is often used for privilege escalation or persistence.
+
+---
 Replace a DLL with a malicious one so it runs at the start of a service instead, first we find a service that is vulnerable to DLL hijacking
 ```
 Get-ItemProperty "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*" | select displayname
