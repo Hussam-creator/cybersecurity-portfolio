@@ -1,4 +1,10 @@
+# Network Capture
 
+## Overview
+
+Network capture involves monitoring and analysing network traffic to identify sensitive information transmitted across the environment. During an Active Directory assessment, captured traffic may reveal authentication attempts, service configurations, or credentials that can be leveraged for further access. Network capture is particularly valuable for identifying insecure protocols and understanding communication patterns that may expose additional attack opportunities.
+
+---
 LLMNR Poisoning
 ---
 With port enumeration failed we can use responder to obtain NTLM hashes
