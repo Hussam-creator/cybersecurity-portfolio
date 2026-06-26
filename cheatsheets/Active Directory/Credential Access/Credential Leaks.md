@@ -1,3 +1,10 @@
+# Credential Leaks
+
+## Overview
+
+Credential leaks occur when usernames, passwords, or authentication tokens are unintentionally exposed through misconfigurations, insecure storage practices, or publicly accessible resources. Examples include credentials stored in configuration files, scripts, shared folders, or documentation. Identifying leaked credentials during an assessment is important, as even low-privileged accounts may provide an entry point for further compromise of the Active Directory environment.
+
+---
 GPP Passwords
 ---
 Group Policy Preferences (GPP) Passwords
