@@ -1,5 +1,10 @@
-Remote File Inclusion
+# Remote File Inclusion (RFI)
 
+# Overview
+
+Remote File Inclusion (RFI) occurs when a web application accepts a user-supplied URL and includes its contents without proper validation. If remote file inclusion is enabled, an attacker may be able to execute malicious code hosted on an external server, potentially resulting in complete server compromise.
+
+---
 
 The **allow_url_include** and **allow_url_fopen** option needs to be enabled for this attack to work 
 - we can check for this in phpinfo.php
