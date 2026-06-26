@@ -28,7 +28,7 @@ Credential access techniques
 Lateral movement using RDP, WinRM, and SMB
 Privilege escalation and attack path analysis using BloodHound and PowerView
 
-##Disclaimer
+## Disclaimer
 
 This environment exists solely for educational and research purposes. All testing is performed on systems that I own and control, and no techniques demonstrated in this repository are intended for use against unauthorised systems.
 
