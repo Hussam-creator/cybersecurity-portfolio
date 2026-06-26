@@ -73,7 +73,7 @@ PORT      STATE SERVICE    VERSION
 Key Findings:
 - Port 22 - SSH
 - Port 80 - HTTP (nginx)
-- Port 61616 - HTTP (ActiveMQ)
+- Port 61616 - HTTP (ActiveMQ 5.15.15)
 
 Upon discovering open web application ports I run a Nikto scan 
 ```
@@ -102,3 +102,15 @@ nikto -h 10.129.230.87
 ---------------------------------------------------------------------------
 + 1 host(s) tested
 ```                                                       
+Before moving forward to port enumeration, through our intial reconnaissance we have already discovered the server is running the ActiveMQ service, the version number for this service (5.15.15) and that there is a default account enabled found by our Nikto scan
+```
+Default account found for 'ActiveMQRealm' at (ID 'admin', PW 'admin')
+```
+
+## Intial Access
+
+Navigating to port 80 issues us with a login prompt 
+
+![login](../Images/login.png)
+
+Trying the credentials we found earlier (admin:admin) was successful, we were also able to confirm the default credentials through a google search 
