@@ -1,3 +1,10 @@
+# PowerView
+
+## Overview
+
+PowerView is a PowerShell-based reconnaissance tool designed for enumerating Active Directory environments. It provides extensive functionality for gathering information about domain users, groups, computers, trusts, sessions, and access control settings. During an assessment, PowerView enables testers to identify privileged accounts, discover potential privilege escalation opportunities, and understand the overall structure and security posture of the domain.
+
+---
 [https://github.com/PowerShellMafia/PowerSploit/tree/master/Recon](https://github.com/PowerShellMafia/PowerSploit/tree/master/Recon)
 
 To execute scripts 
