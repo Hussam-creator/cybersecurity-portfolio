@@ -1,4 +1,10 @@
+# Netsh
 
+## Overview
+
+During Windows-based pivoting, Netsh can be used to configure port forwarding rules directly on a compromised host. This allows traffic to be redirected from one interface or port to another, effectively exposing internal services to an external attacker. It is a built-in Windows utility, which makes it particularly useful in environments where introducing external tools may be limited or heavily monitored.
+
+---
 Connect to windows compromised host
 ```
 xfreerdp3 /v:10.129.42.198 /u:htb-student /p:'HTB_@cademy_stdnt!'
