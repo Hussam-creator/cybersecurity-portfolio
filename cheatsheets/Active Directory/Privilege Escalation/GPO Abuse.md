@@ -1,4 +1,10 @@
+# GPO Abuse
 
+## Overview
+
+Group Policy Objects (GPOs) are used to manage and enforce configuration settings across an Active Directory environment. If an attacker gains the ability to modify or create GPOs, they can deploy malicious scripts, create administrative accounts, alter security settings, or execute commands on multiple systems simultaneously. Identifying users or groups with excessive control over GPOs is therefore an important part of assessing the security of an Active Directory environment.
+
+---
 We can abuse GPO misconfigurations to achieve the following:
 - Adding additional rights to a user (e.g. SeImpersonatePrivilege)
 - Adding a local admin user
