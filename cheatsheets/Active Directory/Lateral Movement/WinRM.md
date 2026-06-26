@@ -1,4 +1,10 @@
+# Windows Remote Management (WinRM)
 
+## Overview
+
+Windows Remote Management (WinRM) is a Windows service that enables remote administration and command execution over the network. It is commonly used by administrators for managing systems and is frequently leveraged during Active Directory assessments to execute commands remotely when valid credentials are obtained. Enumerating WinRM access can help identify systems that permit remote management and potential paths for lateral movement or privilege escalation within the domain.
+
+---
 Enumerating members of the Remote Management Users group using PowerView
 
 ```
