@@ -1,4 +1,10 @@
+# Capabilities 
 
+## Overview
+
+Capabilities allow certain executables to perform privileged operations without requiring full root access. If misconfigured, binaries with special capabilities, may be abused to escalate privileges by leveraging unintended functionality within otherwise trusted binaries.
+
+---
 ```
 find /usr/bin /usr/sbin /usr/local/bin /usr/local/sbin -type f -exec getcap {} \;
 ```
