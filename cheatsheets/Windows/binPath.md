@@ -1,4 +1,10 @@
+# BinPath (Service Binary Path Modification)
 
+## Overview
+
+During service misconfiguration analysis, it is important to examine whether service configurations allow modification of the binary path. If a user has permission to change the binPath of a service that runs with elevated privileges, it may be possible to redirect execution to a malicious executable. This can lead to privilege escalation when the service is restarted or reloaded.
+
+---
 Weak Service Permissions
 ---
 
