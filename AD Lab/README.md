@@ -19,18 +19,22 @@ Validate and experiment with offensive security tools and methodologies.
 
 This lab is used to explore a range of Active Directory security concepts, including:
 
-Domain enumeration and reconnaissance
-Access Control List (ACL) abuse
-Kerberos-based attacks
-Active Directory Certificate Services (AD CS) attacks
-Group Policy Object (GPO) abuse
-Credential access techniques
-Lateral movement using RDP, WinRM, and SMB
-Privilege escalation and attack path analysis using BloodHound and PowerView
+- Active Directory enumeration
+- SMB enumeration
+- LDAP enumeration
+- Kerberoasting
+- AS-REP Roasting
+- BloodHound analysis
+- Privilege escalation
+- Lateral movement
 
 ## Disclaimer
 
 This environment exists solely for educational and research purposes. All testing is performed on systems that I own and control, and no techniques demonstrated in this repository are intended for use against unauthorised systems.
+
+The environment was built by following the excellent walkthrough created by TCM Security. The original tutorial can be found here:
+
+- TCM Security – How to Build an Active Directory Hacking Lab: <https://www.youtube.com/watch?v=xftEuVQ7kY0&t=2751s>
 
 | Machine | Role | Operating System |
 |----------|-------|------------------|
