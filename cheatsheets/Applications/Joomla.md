@@ -1,4 +1,10 @@
+# Joomla
 
+## Overview
+
+During web application enumeration, it is important to identify the presence of CMS platforms such as Joomla, as they may expose version information, administrative interfaces, and vulnerable extensions. Joomla installations are often targeted through outdated components, weak administrative credentials, or misconfigured file permissions. Identifying the version and installed extensions is critical for assessing potential exploitation paths.
+
+---
 droopescan
 ```
 sudo pip3 install droopescan
