@@ -1,4 +1,10 @@
+# User Privileges 
 
+## Overview
+
+During Windows enumeration, it is important to understand the specific privileges assigned to the current user account. Even without administrative group membership, certain privileges such as SeImpersonatePrivilege or SeDebugPrivilege can be leveraged for privilege escalation. Understanding assigned privileges is critical for identifying potential escalation paths.
+
+---
 If we have the privilege assigned but not enabled
 https://www.leeholmes.com/adjusting-token-privileges-in-powershell/
 https://www.powershellgallery.com/packages/PoshPrivilege/0.3.0.0/Content/Scripts%5CEnable-Privilege.ps1
