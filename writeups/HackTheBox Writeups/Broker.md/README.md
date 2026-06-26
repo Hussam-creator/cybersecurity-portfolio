@@ -113,6 +113,6 @@ Default account found for 'ActiveMQRealm' at (ID 'admin', PW 'admin')
 
 Navigating to port 80 issues us with a login prompt 
 
-![login](/Images/login.png)
+![login](Images/login.png)
 
 Trying the credentials we found earlier (admin:admin) was successful, we were also able to confirm the default credentials through a google search 
