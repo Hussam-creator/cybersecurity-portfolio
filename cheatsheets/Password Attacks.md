@@ -1,4 +1,10 @@
+# Password Attacks
 
+## Overview
+
+Password attacks are used to assess the strength of authentication mechanisms and identify weak, reused, or default credentials. Techniques such as password spraying, brute forcing, dictionary attacks, or credential stuffing may be used to move further into the network, uncover confidential information, or even lead to complote compromise. Before performing password attacks, it is important to understand any account passowrd policies or rate-limiting controls to minimise detection and avoid unnecessary disruption.
+
+---
 Custom Wordlist
 ```
 cewl <domain> -w wordlist.txt
