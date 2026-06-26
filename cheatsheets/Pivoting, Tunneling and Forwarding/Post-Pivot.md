@@ -1,4 +1,10 @@
+# Post-Pivot
 
+## Overview
+
+After gaining access to an internal network, the focus shifts to understanding the environment and identifying new attack paths. This includes enumerating internal services, discovering additional hosts, and identifying trust relationships between systems. Post-pivoting is less about initial exploitation and more about expanding access, moving laterally, and uncovering higher-value targets such as domain controllers, file servers, or credential sources. In some cases we may found ourseleve needing to pivot again to move further in the network.
+
+---
 Once we have moved laterally or pivoted
 
 Find creds
