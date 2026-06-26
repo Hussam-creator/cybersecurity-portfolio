@@ -1,4 +1,10 @@
+# Access Control List (ACL)
 
+## Overview
+
+Access Control Lists (ACLs) define the permissions that users and groups have over objects within an Active Directory environment, such as users, groups, computers, and organisational units. Misconfigured ACLs can grant excessive privileges that allow an attacker to modify sensitive objects, reset passwords, or escalate their permissions within the domain. During an assessment, analysing ACLs helps identify unintended access paths and potential privilege escalation opportunities.
+
+---
 We are interested in the following permissions:
 - GenericAll: Full permissions on object
 - GenericWrite: Edit certain attributes on the object
