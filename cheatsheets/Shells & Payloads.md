@@ -1,4 +1,10 @@
+# Shells & Payloads
 
+## Overview
+
+During exploitation, it is important to understand how to obtain interactive access to a compromised system and how payloads are used to achieve code execution. Shells provide a way to interact with the target system, ranging from basic command execution to fully interactive reverse shells. Payloads are the code used to initiate this connection or execute commands on the target. Different environments may require staged or stageless payloads, and shell stability should be considered to ensure reliable interaction during post-exploitation activities.
+
+---
 https://www.revshells.com/
 
 Stabilize Shell
