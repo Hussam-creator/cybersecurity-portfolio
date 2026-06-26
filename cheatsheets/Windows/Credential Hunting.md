@@ -1,4 +1,10 @@
+# Credential Hunting 
 
+## Overview
+
+During post-exploitation, it is important to search the system for stored credentials that may be reused across services or accounts. These credentials are often found in configuration files, registry keys, scripts, browser storage, or backup files. Identifying reusable credentials can significantly expand access within the environment and may lead to privilege escalation or lateral movement.
+
+---
 Application Configuration Files
 ---
 ```
