@@ -13,6 +13,7 @@ Initial reconnaissance was performed using Nmap to identify open ports, services
 ```
 nmap -sCV -A -p- 10.129.230.87
 ```
+```
 Starting Nmap 7.95 ( https://nmap.org ) at 2026-04-19 15:14 BST
 Nmap scan report for 10.129.230.87
 Host is up (0.014s latency).
@@ -68,64 +69,6 @@ PORT      STATE SERVICE    VERSION
 |_http-title: Site doesn't have a title.
 61616/tcp open  apachemq   ActiveMQ OpenWire transport 5.15.15
 2 services unrecognized despite returning data. If you know the service/version, please submit the following fingerprints at https://nmap.org/cgi-bin/submit.cgi?new-service :
-==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
-SF-Port5672-TCP:V=7.95%I=7%D=4/19%Time=69E4E378%P=x86_64-pc-linux-gnu%r(Ge
-SF:tRequest,89,"AMQP\x03\x01\0\0AMQP\0\x01\0\0\0\0\0\x19\x02\0\0\0\0S\x10\
-SF:xc0\x0c\x04\xa1\0@p\0\x02\0\0`\x7f\xff\0\0\0`\x02\0\0\0\0S\x18\xc0S\x01
-SF:\0S\x1d\xc0M\x02\xa3\x11amqp:decode-error\xa17Connection\x20from\x20cli
-SF:ent\x20using\x20unsupported\x20AMQP\x20attempted")%r(HTTPOptions,89,"AM
-SF:QP\x03\x01\0\0AMQP\0\x01\0\0\0\0\0\x19\x02\0\0\0\0S\x10\xc0\x0c\x04\xa1
-SF:\0@p\0\x02\0\0`\x7f\xff\0\0\0`\x02\0\0\0\0S\x18\xc0S\x01\0S\x1d\xc0M\x0
-SF:2\xa3\x11amqp:decode-error\xa17Connection\x20from\x20client\x20using\x2
-SF:0unsupported\x20AMQP\x20attempted")%r(RTSPRequest,89,"AMQP\x03\x01\0\0A
-SF:MQP\0\x01\0\0\0\0\0\x19\x02\0\0\0\0S\x10\xc0\x0c\x04\xa1\0@p\0\x02\0\0`
-SF:\x7f\xff\0\0\0`\x02\0\0\0\0S\x18\xc0S\x01\0S\x1d\xc0M\x02\xa3\x11amqp:d
-SF:ecode-error\xa17Connection\x20from\x20client\x20using\x20unsupported\x2
-SF:0AMQP\x20attempted")%r(RPCCheck,89,"AMQP\x03\x01\0\0AMQP\0\x01\0\0\0\0\
-SF:0\x19\x02\0\0\0\0S\x10\xc0\x0c\x04\xa1\0@p\0\x02\0\0`\x7f\xff\0\0\0`\x0
-SF:2\0\0\0\0S\x18\xc0S\x01\0S\x1d\xc0M\x02\xa3\x11amqp:decode-error\xa17Co
-SF:nnection\x20from\x20client\x20using\x20unsupported\x20AMQP\x20attempted
-SF:")%r(DNSVersionBindReqTCP,89,"AMQP\x03\x01\0\0AMQP\0\x01\0\0\0\0\0\x19\
-SF:x02\0\0\0\0S\x10\xc0\x0c\x04\xa1\0@p\0\x02\0\0`\x7f\xff\0\0\0`\x02\0\0\
-SF:0\0S\x18\xc0S\x01\0S\x1d\xc0M\x02\xa3\x11amqp:decode-error\xa17Connecti
-SF:on\x20from\x20client\x20using\x20unsupported\x20AMQP\x20attempted")%r(D
-SF:NSStatusRequestTCP,89,"AMQP\x03\x01\0\0AMQP\0\x01\0\0\0\0\0\x19\x02\0\0
-SF:\0\0S\x10\xc0\x0c\x04\xa1\0@p\0\x02\0\0`\x7f\xff\0\0\0`\x02\0\0\0\0S\x1
-SF:8\xc0S\x01\0S\x1d\xc0M\x02\xa3\x11amqp:decode-error\xa17Connection\x20f
-SF:rom\x20client\x20using\x20unsupported\x20AMQP\x20attempted")%r(SSLSessi
-SF:onReq,89,"AMQP\x03\x01\0\0AMQP\0\x01\0\0\0\0\0\x19\x02\0\0\0\0S\x10\xc0
-SF:\x0c\x04\xa1\0@p\0\x02\0\0`\x7f\xff\0\0\0`\x02\0\0\0\0S\x18\xc0S\x01\0S
-SF:\x1d\xc0M\x02\xa3\x11amqp:decode-error\xa17Connection\x20from\x20client
-SF:\x20using\x20unsupported\x20AMQP\x20attempted")%r(TerminalServerCookie,
-SF:89,"AMQP\x03\x01\0\0AMQP\0\x01\0\0\0\0\0\x19\x02\0\0\0\0S\x10\xc0\x0c\x
-SF:04\xa1\0@p\0\x02\0\0`\x7f\xff\0\0\0`\x02\0\0\0\0S\x18\xc0S\x01\0S\x1d\x
-SF:c0M\x02\xa3\x11amqp:decode-error\xa17Connection\x20from\x20client\x20us
-SF:ing\x20unsupported\x20AMQP\x20attempted");
-==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
-SF-Port61613-TCP:V=7.95%I=7%D=4/19%Time=69E4E373%P=x86_64-pc-linux-gnu%r(H
-SF:ELP4STOMP,27F,"ERROR\ncontent-type:text/plain\nmessage:Unknown\x20STOMP
-SF:\x20action:\x20HELP\n\norg\.apache\.activemq\.transport\.stomp\.Protoco
-SF:lException:\x20Unknown\x20STOMP\x20action:\x20HELP\n\tat\x20org\.apache
-SF:\.activemq\.transport\.stomp\.ProtocolConverter\.onStompCommand\(Protoc
-SF:olConverter\.java:258\)\n\tat\x20org\.apache\.activemq\.transport\.stom
-SF:p\.StompTransportFilter\.onCommand\(StompTransportFilter\.java:85\)\n\t
-SF:at\x20org\.apache\.activemq\.transport\.TransportSupport\.doConsume\(Tr
-SF:ansportSupport\.java:83\)\n\tat\x20org\.apache\.activemq\.transport\.tc
-SF:p\.TcpTransport\.doRun\(TcpTransport\.java:233\)\n\tat\x20org\.apache\.
-SF:activemq\.transport\.tcp\.TcpTransport\.run\(TcpTransport\.java:215\)\n
-SF:\tat\x20java\.lang\.Thread\.run\(Thread\.java:750\)\n\0\n");
-Device type: general purpose|router
-Running: Linux 5.X, MikroTik RouterOS 7.X
-OS CPE: cpe:/o:linux:linux_kernel:5 cpe:/o:mikrotik:routeros:7 cpe:/o:linux:linux_kernel:5.6.3
-OS details: Linux 5.0 - 5.14, MikroTik RouterOS 7.2 - 7.5 (Linux 5.6.3)
-Network Distance: 2 hops
-Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
-
-TRACEROUTE (using port 3306/tcp)
-HOP RTT      ADDRESS
-1   15.22 ms 10.10.14.1
-2   15.34 ms 10.129.230.87
-
-OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-Nmap done: 1 IP address (1 host up) scanned in 44.61 seconds
+```
+                                                              
                                                               
