@@ -1,3 +1,10 @@
+# Chisel
+
+## Overview
+
+During network pivoting, Chisel is often used to create fast TCP/UDP tunnels over HTTP, especially in environments where direct connectivity is restricted. It is useful for exposing internal services externally or forwarding ports through a compromised host. Because it operates over a single port and can use HTTP, it is often effective in restricted or firewall-heavy environments.
+
+---
 Reverse SOCKS Proxy
 ---
 - Proxychains and FoxyProxy are used to access a proxy created with one of the other tools
