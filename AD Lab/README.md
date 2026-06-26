@@ -36,7 +36,7 @@ The environment was built by following the excellent walkthrough created by TCM 
 
 - TCM Security – How to Build an Active Directory Hacking Lab: <https://www.youtube.com/watch?v=xftEuVQ7kY0&t=2751s>
 
-<b>
+---
 
 | Machine | Role | Operating System |
 |----------|-------|------------------|
