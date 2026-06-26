@@ -1,3 +1,4 @@
+During the enumeration phase, it is important to identify any hidden directories, files, or subdomains that may expand the application's attack surface. Directory and file fuzzing can help uncover endpoints that are not linked from the main website but are still accessible. Tools such as ffuf and Gobuster are commonly used for this purpose. By supplying a wordlist and targeting the application, these tools can enumerate hidden content, revealing administrative panels, API endpoints, backup files, development pages, and other resources that may be valuable during further testing.
 
 Fuzzing
 ```
