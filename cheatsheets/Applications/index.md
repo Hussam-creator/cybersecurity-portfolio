@@ -17,13 +17,13 @@ This section contains methodology and notes for common web application targets e
 ## Quick Navigation
 
 ### CMS Platforms
-- [Drupal](Drupal.md)
-- [Joomla](Joomla.md)
-- [WordPress](WordPress.md)
+- [Drupal](drupal.md)
+- [Joomla](joomla.md)
+- [WordPress](wordpress.md)
 
 ### Web Services / Frameworks
-- [Jenkins](Jenkins.md)
-- [Tomcat](Tomcat.md)
+- [Jenkins](jenkins.md)
+- [Tomcat](tomcat.md)
 
 ---
 
