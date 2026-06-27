@@ -19,7 +19,7 @@ This section contains methodology and notes for common web application targets e
 ### CMS Platforms
 - [Drupal](drupal.md)
 - [Joomla](joomla.md)
-- [WordPress](wordpress.md)
+- [WordPress](WordPress.md)
 
 ### Web Services / Frameworks
 - [Jenkins](jenkins.md)
