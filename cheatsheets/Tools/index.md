@@ -2,7 +2,7 @@
 
 - [Exiftool](Exiftool.md)
 - [Kerbrute](Kerbrute.md)
-- [LinPEAS / WinPEAS](Linpeas%20-%20Winpeas.md)
+- [PEASS-ng](PEASS-ng.md)
 - [Mimikatz](Mimikatz.md)
 - [Nmap](Nmap.md)
 - [Secretsdump](secretsdump.md)
