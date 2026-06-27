@@ -151,3 +151,20 @@ Exploit execution
 ```
 
 ![system](Images/system.png)
+
+## Conclusion
+
+This target was successfully compromised through exploitiong various vulnerabilities, a file upload vulnerability that lead to the exploitation of ThemeBleed for initial access. Post-exploitation enumeration revealed a privilege escalation vector via CVE-2023-28525, allowing SYSTEM-level access. The result was a full compromise of the target system. 
+
+## Lessons Learned
+
+This machine greatly highlighted the importance of post-compromise manual enumeration. It also demonstrated the risks if insecure file handling and the impact of publicly available proof-of-concepts
+
+## Remediation
+
+To mitigate the issues identified in this assessment, the following actions should be taken:
+
+- Apply security patches for CVE-2023-38146 (ThemeBleed) and CVE-2023-28252
+- Validate file upload functionality
+- Implement least privilege principles
+- Ensure regular system and software updates 
