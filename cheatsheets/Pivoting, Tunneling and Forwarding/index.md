@@ -1,6 +1,6 @@
 # Pivoting, Tunneling and Fowarding 
 
-- [Enumerating](Enumerating.md)
+- [Enumeration](Enumerating.md)
 - [Chisel](Chisel.md)
 - [Ligolo](Ligolo.md)
 - [Netsh](Netsh.md)
