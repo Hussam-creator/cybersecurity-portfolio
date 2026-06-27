@@ -80,13 +80,13 @@ Inspecting the page source indetified file upload extension restrictions, the ap
 
 Test files were uploaded to validate the file extension restrictions and observe application behaviour for bypass techniques
 
-test.txt
-
 ![test](Images/test.png)
 
-test.theme
+test.txt
 
 ![theme](Images/theme.png)
+
+test.theme
 
 ### Themebleed Exploit
 
