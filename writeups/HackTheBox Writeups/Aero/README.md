@@ -98,6 +98,7 @@ A public proof of concept (PoC) for CVE-2023-38146 (ThemeBleed) was idenitfied a
 <https://github.com/Jnnshschl/CVE-2023-38146/blob/main/README.md>
 
 
+
 This exploit generates malicious `.theme` and `.themepack`files which, when opened trigger SMB requests. These requests are intercepted by the attacker's SMB server resulting in a specially crafted DLL being loaded instead of the legitimate one. Execution of the payload leads to remote code execution
 
 ## Initial Access
