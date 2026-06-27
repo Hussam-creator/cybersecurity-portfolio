@@ -2,7 +2,7 @@
 
 - [Privesc](Privesc.md)
 - [Attacks](Attacks.md)
-- [AutoRun Services](AutoRun%20Services.md)
+- [AutoRun Services](AutoRun Services.md)
 - [Credential Hunting](Credential%20Hunting.md)
 - [DLL Hijacking](DLL%20Hijacking.md)
 - [Group Privileges](Group%20Privileges.md)
