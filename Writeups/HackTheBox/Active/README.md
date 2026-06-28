@@ -66,7 +66,7 @@ The non-default shares were prioritized as they present a high probability of se
 smbclient -L 10.129.6.90 -p 445
 ```
 
-![anonymous](Images/anonymous)
+![anonymous](Images/anonymous.png)
 
 ## Credential Discovery
 
@@ -75,11 +75,11 @@ Once unauthenticated access was confirmed, the spider_plus module from NetExec w
 netexec smb 10.129.6.90 -u '' -p '' --spider_plus
 ```
 
-![spider](Images/spider)
+![spider](Images/spider.png)
 
 The output was saved to `/home/kali/.nxc/modules/nxc_spider_plus/10.129.6.90.json`. Examination of the saved output revealed an interesting file called `Groups.xml` in the `Replication` share.
 
-![groups](Images/groups)
+![groups](Images/groups.png)
 
 `smbclient` was used to retrieve the file from the SMB share
 ```
@@ -89,7 +89,6 @@ smbclient //10.129.6.90/Replication -p 445
 get active.htb/Policies/{31B2F340-016D-11D2-945F-00C04FB984F9}/MACHINE/Preferences/Groups/Groups.xml
 ```
 
-![name](Images/name.png)
 ![cpassword](Images/cpassword.png)
 
 Analysis of the retrieved file revealed a username and an associated `cpassword` value. This value indicates credentials stored via Group Policy Preferences (GPP). The decryption key for `cpassword` values has been publicly document by Microsoft and can be used to recover the stored credentials. The `gpp-decrypt` utility can be used to decrypt the password.
