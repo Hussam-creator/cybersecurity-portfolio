@@ -98,10 +98,12 @@ gpp-decrypt edBSHOwhZLTjt/QS9FeIcJ83mjWA98gw9guKOhJOdcqh+ZGMeXOsQbCpZ3xUjTLfCuNH
 
 ![password](Images/password.png)
 
-The recovered credentials were then validated using Netexec against the SMB service. Upon confirmation that the credentials were valid, a Kerberoasting attack was performed to target service account SPNs within the Active Directory environment.
+The recovered credentials were then validated using Netexec against the SMB service. Upon confirmation that the credentials were valid, a Kerberoasting attack was performed to target service account SPNs within the Active Directory environment. Alternatively, `smbclient` can be used for authenticated SMB access as credential validation 
 ```
 netexec smb 10.129.6.90 -u 'SVC_TGS' -p 'GPPstillStandingStrong2k18'
 ```
+
+![smbclient](Images/smbclient.png)
 
 ## Exploitation
 
