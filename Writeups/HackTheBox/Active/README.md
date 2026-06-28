@@ -142,11 +142,19 @@ impacket-psexec active.htb/Administrator:Ticketmaster1968@10.129.6.90 cmd.exe
 
 ## Conclusion
 
-This domain controller was successfully compromised through a chain of misconfigurations and weak credential handling. Initial access was achieved via exposed SMB shares, leading to the discovery of credentials stored in a Group Policy Preferences (GPP) file. Further exploitation via Kerberoasting allowed the extraction and offline cracking of service account credentials. The recovered credentials were then used to obtain remote code execution via PsExec, resulting in full administrative control of the domain controller.
+The domain controller was fully compromised through a chain of misconfigurations and weak credential handling. Initial access was achieved via exposed SMB shares, leading to the discovery of credentials stored in a Group Policy Preferences (GPP) file. Further exploitation via Kerberoasting allowed the extraction and offline cracking of service account credentials. The recovered credentials were then used to obtain remote code execution via PsExec, resulting in full administrative control of the domain controller.As this is a domain controller, compromise of this host could lead to full domain-level access in a real-world environment.
 
 ## Lessons Learned
 
+This assessment demonstrated how weak SMB permissions and credential storage can lead to initial compromise in Active Directory environments. It also highlighted how Kerberoasting can be used to escalate from authenticated domain credentials to privileged account exploitation through offline password cracking. Overall, it demonstarted how exposure of sensitive information can ultimately result in full administrative control of a domain controller and in return possibly an entire domain.
+
 ## Remediation
 
+To mitigate the vulnerabilities identified in this assessment, the following actions should be taken:
 
+- Restrict SMB share permissions and remove anonymous access to sensitive shares such as SYSVOL, NETLOGON, and other domain-related directories
+- Eliminate legacy Group Policy Preferences (GPP) credential storage and ensure all cpassword values are fully removed from the domain
+- Enforce strong, unique passwords for service accounts, particularly those with SPNs, to reduce the risk of Kerberoasting attacks
+- Implement least privilege principles
+- Conduct regular Active Directory security audits and ensure timely patching of domain infrastructure
 
