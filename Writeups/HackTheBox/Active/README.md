@@ -46,7 +46,7 @@ PORT      STATE SERVICE       VERSION
 ...
 ```
 Key Findings:
-- The target is Likely a Windows Active Directory Domain Controller based on the exposed services; Kerberos (88), LDAP (389) and DNS (53)
+- The target is likely a Windows Active Directory Domain Controller based on the exposed services; Kerberos (88), LDAP (389) and DNS (53)
 - Port 135 - RPC is open
 - Port 445 - SMB is open
 
@@ -60,7 +60,7 @@ enum4linux 10.129.6.90
 
 ![enum4linux](Images/enum4linux.png)
 
-The Enum4Linux scan revealed multiple shares including non-default shares such as `Replication` and `Users.
+The Enum4Linux scan revealed multiple shares including non-default shares such as `Replication` and `Users`.
 The non-default shares were prioritized as they present a high probability of sensitive information exposure, further enumeration into the shares was carried out by determining if unauthenticated anonymous access was permitted
 ```
 smbclient -L 10.129.6.90 -p 445
@@ -70,7 +70,7 @@ smbclient -L 10.129.6.90 -p 445
 
 ## Credential Discovery
 
-Once unauthenticated access was confirmed, he spider_plus module from NetExec was used to perform deeper automated mapping of SMB file shares, crawling accessible directories to identify potentially sensitive files.
+Once unauthenticated access was confirmed, the spider_plus module from NetExec was used to perform deeper automated mapping of SMB file shares, crawling accessible directories to identify potentially sensitive files.
 ```
 netexec smb 10.129.6.90 -u '' -p '' --spider_plus
 ```
@@ -83,7 +83,7 @@ The output was saved to `/home/kali/.nxc/modules/nxc_spider_plus/10.129.6.90.jso
 
 `smbclient` was used to retrieve the file from the SMB share
 ```
-smbclient smbclient //10.129.6.90/Replication -p 445
+smbclient //10.129.6.90/Replication -p 445
 ```
 ```
 get active.htb/Policies/{31B2F340-016D-11D2-945F-00C04FB984F9}/MACHINE/Preferences/Groups/Groups.xml
@@ -92,7 +92,7 @@ get active.htb/Policies/{31B2F340-016D-11D2-945F-00C04FB984F9}/MACHINE/Preferenc
 ![name](Images/name.png)
 ![cpassword](Images/cpassword.png)
 
-Analysis of the retrieved file revealed a username and an associated `cpassword` value, this value indicates credentials stored via Group Policy Preferences (GPP). The decryption key for `cpassword` values have been publicly document by Microsfot and can be used to recover the stored credentials. The `gpp-decrypt` utility can be used to decrypt the password
+Analysis of the retrieved file revealed a username and an associated `cpassword` value. This value indicates credentials stored via Group Policy Preferences (GPP). The decryption key for `cpassword` values has been publicly document by Microsoft and can be used to recover the stored credentials. The `gpp-decrypt` utility can be used to decrypt the password.
 ```
 gpp-decrypt edBSHOwhZLTjt/QS9FeIcJ83mjWA98gw9guKOhJOdcqh+ZGMeXOsQbCpZ3xUjTLfCuNH8pG5aSVYdYw/NglVmQ
 ```
@@ -106,8 +106,8 @@ netexec smb 10.129.6.90 -u 'SVC_TGS' -p 'GPPstillStandingStrong2k18'
 
 ## Exploitation
 
-Kerberoasting is an Active Directory post-authentication attack that requires valid domain credentials. This technique targets service accounts configured with Service Principle Names (SPNs). It abuses the Kerberos authentication protocol to request tickets by any authenticated domain user. 
-A requested ticket is encrypted by using the password hash of the service account, once these tickets are obtained by the attacker they can be taken offline for password cracking by using brute-force or dictionary attacks.
+Kerberoasting is an Active Directory post-authentication attack that requires valid domain credentials. This technique targets service accounts configured with Service Principal Names (SPNs). It abuses the Kerberos authentication protocol to request tickets by any authenticated domain user. 
+A requested ticket is encrypted by using the password hash of the service account. Once these tickets are obtained by the attacker they can be taken offline for password cracking by using brute-force or dictionary attacks.
 If the service account targeted has elevated privileges, this can lead to privilege escalation.
 ```
 impacket-GetUserSPNs -dc-ip 10.129.6.90 active.htb/SVC_TGS -request
@@ -133,7 +133,7 @@ netexec smb 10.129.6.90 -u 'Administrator' -p 'Ticketmaster1968'
 
 ![pwned](Images/pwned.png)
 
-Following successful authentication of the credentials for the `Administrator` account, a privileged user, `Impacket-Psexec` was used to execute commands remotely and obtain an interactive shell with administrative privileges. 
+Following successful authentication as the `Administrator` account, a privileged user, `Impacket-Psexec` was used to execute commands remotely and obtain an interactive shell with administrative privileges. 
 ```
 impacket-psexec active.htb/Administrator:Ticketmaster1968@10.129.6.90 cmd.exe
 ```
@@ -142,11 +142,11 @@ impacket-psexec active.htb/Administrator:Ticketmaster1968@10.129.6.90 cmd.exe
 
 ## Conclusion
 
-The domain controller was fully compromised through a chain of misconfigurations and weak credential handling. Initial access was achieved via exposed SMB shares, leading to the discovery of credentials stored in a Group Policy Preferences (GPP) file. Further exploitation via Kerberoasting allowed the extraction and offline cracking of service account credentials. The recovered credentials were then used to obtain remote code execution via PsExec, resulting in full administrative control of the domain controller.As this is a domain controller, compromise of this host could lead to full domain-level access in a real-world environment.
+The domain controller was fully compromised through a chain of misconfigurations and weak credential handling. Initial access was achieved via exposed SMB shares, leading to the discovery of credentials stored in a Group Policy Preferences (GPP) file. Further exploitation via Kerberoasting allowed the extraction and offline cracking of service account credentials. The recovered credentials were then used to obtain remote code execution via PsExec, resulting in full administrative control of the domain controller. As this is a domain controller, compromise of this host could lead to full domain-level access in a real-world environment.
 
 ## Lessons Learned
 
-This assessment demonstrated how weak SMB permissions and credential storage can lead to initial compromise in Active Directory environments. It also highlighted how Kerberoasting can be used to escalate from authenticated domain credentials to privileged account exploitation through offline password cracking. Overall, it demonstarted how exposure of sensitive information can ultimately result in full administrative control of a domain controller and in return possibly an entire domain.
+This assessment demonstrated how weak SMB permissions and credential storage can lead to initial compromise in Active Directory environments. It also highlighted how Kerberoasting can be used to escalate from authenticated domain credentials to privileged account exploitation through offline password cracking. Overall, it demonstrated how exposure of sensitive information can ultimately result in full administrative control of a domain controller and potentially an entire Active Directory domain.
 
 ## Remediation
 
