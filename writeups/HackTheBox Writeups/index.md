@@ -2,5 +2,9 @@
 
 ## Machines
 
-- [Broker](Broker/README.md)
-- [Aero](Aero/README.md)
+- [Broker](Broker/)
+- [Aero](Aero/)
+
+---
+
+[← Back to Writeups](../)
