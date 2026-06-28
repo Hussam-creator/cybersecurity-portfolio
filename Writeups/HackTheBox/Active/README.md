@@ -108,7 +108,9 @@ netexec smb 10.129.6.90 -u 'SVC_TGS' -p 'GPPstillStandingStrong2k18'
 ## Exploitation
 
 Kerberoasting is an Active Directory post-authentication attack that requires valid domain credentials. This technique targets service accounts configured with Service Principal Names (SPNs). It abuses the Kerberos authentication protocol to request tickets by any authenticated domain user. 
+
 A requested ticket is encrypted by using the password hash of the service account. Once these tickets are obtained by the attacker they can be taken offline for password cracking by using brute-force or dictionary attacks.
+
 If the service account targeted has elevated privileges, this can lead to privilege escalation.
 ```
 impacket-GetUserSPNs -dc-ip 10.129.6.90 active.htb/SVC_TGS -request
