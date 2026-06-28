@@ -3,7 +3,7 @@
 Select a category:
 
 - 📁 [HackTheBox](./HackTheBox/)
-- 📁 [OffSec Proving Grounds](./offsec-pg/)
+- 📁 [OffSec Proving Grounds](./Offsec-pg/)
 
 ---
 
