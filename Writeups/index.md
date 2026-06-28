@@ -2,7 +2,7 @@
 
 Select a category:
 
-- 📁 [HackTheBox Writeups](./HackTheBox%20Writeups/)
+- 📁 [HackTheBox](./HackTheBox/)
 - 📁 [OffSec Proving Grounds](./offsec-pg/)
 
 ---
