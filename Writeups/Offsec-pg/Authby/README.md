@@ -94,7 +94,33 @@ Further examination also revealed a `.htpasswd` file containing the password has
 
 ## Password Cracking
 
+The retrieved hash was saved locally for offline password cracking. `hashid` was used to identify the hash type, and the appropriate Hashcat mode was selected using `hashcat --help`.
+```
+└─$ hashid offsec.hash
+--File 'offsec.hash'--
+Analyzing '$apr1$oRfRsc/K$UpYpplHDlaemqseM39Ugg0'
+[+] MD5(APR) 
+[+] Apache MD5 
+--End of file 'offsec.hash'--
+```
+```
+┌──(kali㉿kali)-[~/machines/windows/authby/exploit]
+└─$ hashcat --help | grep -i "md5"   
+1600 | Apache $apr1$ MD5, md5apr1, MD5 (APR)
+```
+`Hashcat` was then used to crack the hash, revealing the plaintext password
+
+![hashcat](Images/hashcat.png)
+
 ## Initial Access
+
+After obtaining a set of credentials, I proceded to explore the HTTP service on port 242. Navigating tp the service presented a login prompt, which was successfully bypassed using our new credentials `offsec:elite`.
+
+![login](Images/login.png)
+
+Following successful authentication to the web application, I returned to the FTP service, where I had access to the web server's document root. A `Netcat` listener was setup then a PHP reverse shell was uploaded and executed through the HTTP service, resulting in remote code execution and the initial foothold on the target system 
+
+![initial](Images/initial.png)
 
 ## Privilege Escalation
 
