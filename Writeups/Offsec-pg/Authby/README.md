@@ -149,6 +149,22 @@ The binary was then transferred to the target via FTP and executed, resulting in
 
 ## Conclusion
 
+Initial access was achieved via FTP enumeration, leading to credential discovery enabling remote code execution through a file upload vulnerability. Further privilege escalation was achieved by leveraging a kernel exploit (MS11-046), resulting in SYSTEM-level access and a full compromise of the machine
+
 ## Lessons Learned
 
+This machine reinforced how quickly weak credentials can lead to a full system compromise when combined with poor access control. 
+
+Although `SeImpersonatePrivilege` was present, attempts using the Potato-based attack (GodPotato) were unsuccessful. This was likely due to the target running the older Windows Server 2008 system, where alternative techniques such as JuicyPotato would have been more appropriate.
+
+Overall, this machine demonstrated the importance of validating appropriate exploitation paths and exposing how systems can be exposed to multiple privilege escalation vectors. 
+
 ## Remediation
+
+To mitigate the vulnerabilities identified in this assessment, the following actions should be taken:
+
+- Disable anonymous FTP access and ensure proper authentication is enforced
+- Remove sensitive files from web root directories
+- Restrict web upload functionality or impose file validation to prevent execution of uploaded content
+- Apply all relevant security patches to address known kernel-level vulnerabilities such as MS11-046 (CVE-2011-1249)
+- Implement least privilege principle where privileges such as SeImpersonatePrivilege where not required
