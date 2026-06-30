@@ -124,6 +124,27 @@ Following successful authentication to the web application, I returned to the FT
 
 ## Privilege Escalation
 
+Once an initial foothold was established, system privileges were enumerated. The current user was found to have `SeImpersonatePrivilege` assigned, an prvililege escalation attempt was made via a potato-based exploit (Godpotato) but proved unsuccessful. 
+
+![privileges](Images/privileges.png)
+
+Switching attack vectors, further enumeration of the system using `systeminfo` revealed that a older Windows Server version was being run on the target, and so with a potentially vulnerbale kernel.
+
+![systeminfo](Images/systeminfo.png)
+
+A known kernel exploit was identified via Exploit-DB (MS11-046/ CVE-2011-1249) and compiled locally.
+
+This exploit works by abusing a flaw in the AFD driver to execute kernel-level code. It replaces the current process token with a SYSTEM toke, granting full administrative privileges
+Source: https://www.exploit-db.com/exploits/40564
+```
+i686-w64-mingw32-gcc -o 40564.exe 40564.c -lws2_32
+```
+
+The binary was then transferred to the target via FTP and executed, resulting in elevated SYSTEM privileges
+
+![privesc](Images/privesc.png)
+![system](Images/system.png)
+
 ## Conclusion
 
 ## Lessons Learned
