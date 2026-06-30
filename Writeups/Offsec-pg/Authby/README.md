@@ -87,3 +87,18 @@ The discovery of the `admin` username prompted further enumeration and so common
 
 ![authentication](Images/authentication.png)
 
+The discovery of `index.php` abd `.htaccess` suggested that the FTP server exposed the document root of a web server. Files uploaded could be potentially served by the web server leading to possible remote code execution.
+
+Further examination also revealed a `.htpasswd` file containing the password hash for the `Offsec` user
+
+## Password Cracking
+
+## Initial Access
+
+## Privilege Escalation
+
+## Conclusion
+
+## Lessons Learned
+
+## Remediation
