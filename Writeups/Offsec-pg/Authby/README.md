@@ -20,7 +20,7 @@ The following methodology was conducted during this assessment:
 ---
 ## Enumeration 
 
-Enumeration began with a comprehensive network scan to expose any open ports and sevices and identify attack vectors
+Enumeration began with a comprehensive network scan to expose any open ports and services and identify attack vectors
 ```
 nmap 192.168.178.46 -sCV -A -p-
 ```
@@ -73,7 +73,7 @@ Key Findings:
 - Port 3389 - RDP
 - FTP Anonymous FTP login allowed
 
-The FTP service was prioritsed as the initial point of enumeration because anonymous FTP login was enabled. Successful access may lead to the exposure of sensitive information such as; the systems directory structure, disclosure of configuration files, or even permit file uploads.
+The FTP service was prioritised as the initial point of enumeration because anonymous FTP login was enabled. Successful access may lead to the exposure of sensitive information such as; the systems directory structure, disclosure of configuration files, or even permit file uploads.
 ```
 ftp 192.168.178.46
 ```
@@ -82,11 +82,11 @@ ftp 192.168.178.46
 
 Anonymous FTP access revealed several files: `acc[Offsec].uac`, `acc[anonymous].uac`, `acc[admin].uac`. These filenames disclosed potential usernames that could be used for subsequent authentication or brute forcing attempts.
 
-The discovery of the `admin` username prompted further enumeration and so common default credentials were used to to authenticate to the FTP server. Successful authentication was established with the credentiasl `admin:admin`.
+The discovery of the `admin` username prompted further enumeration and so common default credentials were used to to authenticate to the FTP server. Successful authentication was established with the credentials `admin:admin`.
 
 ![authentication](Images/authentication.png)
 
-The discovery of `index.php` abd `.htaccess` suggested that the FTP server exposed the document root of a web server. Files uploaded could be potentially served by the web server leading to possible remote code execution.
+The discovery of `index.php` and `.htaccess` suggested that the FTP server exposed the document root of a web server. Files uploaded could be potentially served by the web server leading to possible remote code execution.
 
 Further examination also revealed a `.htpasswd` file containing the password hash for the `Offsec` user
 
@@ -114,7 +114,7 @@ Analyzing '$apr1$oRfRsc/K$UpYpplHDlaemqseM39Ugg0'
 
 ## Initial Access
 
-After obtaining a set of credentials, I proceded to explore the HTTP service on port 242. Navigating tp the service presented a login prompt, which was successfully bypassed using our new credentials `offsec:elite`.
+After obtaining a set of credentials, I proceeded to explore the HTTP service on port 242. Navigating to the service presented a login prompt, which was successfully bypassed using our new credentials `offsec:elite`.
 
 ![login](Images/login.png)
 
@@ -124,17 +124,17 @@ Following successful authentication to the web application, I returned to the FT
 
 ## Privilege Escalation
 
-Once an initial foothold was established, system privileges were enumerated. The current user was found to have `SeImpersonatePrivilege` assigned, an prvililege escalation attempt was made via a potato-based exploit (Godpotato) but proved unsuccessful. 
+Once an initial foothold was established, system privileges were enumerated. The current user was found to have `SeImpersonatePrivilege` assigned, privilege escalation was attemptted via a potato-based exploit (Godpotato) but proved unsuccessful. 
 
 ![privileges](Images/privileges.png)
 
-Switching attack vectors, further enumeration of the system using `systeminfo` revealed that a older Windows Server version was being run on the target, and so with a potentially vulnerbale kernel.
+Switching attack vectors, further enumeration of the system using `systeminfo` revealed that an older Windows Server version was being run on the target, indicating a potentially vulnerable kernel.
 
 ![systeminfo](Images/systeminfo.png)
 
 A known kernel exploit was identified via Exploit-DB (MS11-046/ CVE-2011-1249) and compiled locally.
 
-This exploit works by abusing a flaw in the AFD driver to execute kernel-level code. It replaces the current process token with a SYSTEM toke, granting full administrative privileges
+This exploit works by abusing a flaw in the AFD driver to execute kernel-level code. It replaces the current process token with a SYSTEM token, granting full administrative privileges
 
 Source: https://www.exploit-db.com/exploits/40564
 ```
@@ -149,7 +149,7 @@ The binary was then transferred to the target via FTP and executed, resulting in
 
 ## Conclusion
 
-Initial access was achieved via FTP enumeration, leading to credential discovery enabling remote code execution through a file upload vulnerability. Further privilege escalation was achieved by leveraging a kernel exploit (MS11-046), resulting in SYSTEM-level access and a full compromise of the machine
+Initial access was achieved via FTP enumeration, leading to credential discovery enabling remote code execution through a file upload vulnerability. Further privilege escalation was achieved by leveraging a kernel exploit (MS11-046), resulting in SYSTEM-level access and full system compromise.
 
 ## Lessons Learned
 
@@ -167,4 +167,4 @@ To mitigate the vulnerabilities identified in this assessment, the following act
 - Remove sensitive files from web root directories
 - Restrict web upload functionality or impose file validation to prevent execution of uploaded content
 - Apply all relevant security patches to address known kernel-level vulnerabilities such as MS11-046 (CVE-2011-1249)
-- Implement least privilege principle where privileges such as SeImpersonatePrivilege where not required
+- Implement least privilege principle where privileges such as SeImpersonatePrivilege are not required
