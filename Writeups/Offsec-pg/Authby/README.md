@@ -90,7 +90,7 @@ The discovery of `index.php` abd `.htaccess` suggested that the FTP server expos
 
 Further examination also revealed a `.htpasswd` file containing the password hash for the `Offsec` user
 
-![hash](Images/hash.png)
+![password](Images/password.png)
 
 ## Password Cracking
 
