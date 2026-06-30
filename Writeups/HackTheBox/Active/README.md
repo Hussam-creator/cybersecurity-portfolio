@@ -145,11 +145,15 @@ impacket-psexec active.htb/Administrator:Ticketmaster1968@10.129.6.90 cmd.exe
 
 ## Conclusion
 
-The domain controller was fully compromised through a chain of misconfigurations and weak credential handling. Initial access was achieved via exposed SMB shares, leading to the discovery of credentials stored in a Group Policy Preferences (GPP) file. Further exploitation via Kerberoasting allowed the extraction and offline cracking of service account credentials. The recovered credentials were then used to obtain remote code execution via PsExec, resulting in full administrative control of the domain controller. As this is a domain controller, compromise of this host could lead to full domain-level access in a real-world environment.
+The domain controller was fully compromised through a chain of misconfigurations and weak credential handling. Initial access was achieved via exposed SMB shares, leading to the discovery of credentials stored in a Group Policy Preferences (GPP) file. Further exploitation via Kerberoasting allowed the extraction and offline cracking of service account credentials. The recovered credentials were then used to obtain remote code execution via PsExec, resulting in full administrative control of the domain controller. 
+
+As this is a domain controller, compromise of this host could lead to full domain-level access in a real-world environment.
 
 ## Lessons Learned
 
-This assessment demonstrated how weak SMB permissions and credential storage can lead to initial compromise in Active Directory environments. It also highlighted how Kerberoasting can be used to escalate from authenticated domain credentials to privileged account exploitation through offline password cracking. Overall, it demonstrated how exposure of sensitive information can ultimately result in full administrative control of a domain controller and potentially an entire Active Directory domain.
+This assessment demonstrated how weak SMB permissions and credential storage can lead to initial compromise in Active Directory environments. It also highlighted how Kerberoasting can be used to escalate from authenticated domain credentials to privileged account exploitation through offline password cracking.
+
+Overall, it demonstrated how exposure of sensitive information can ultimately result in full administrative control of a domain controller and potentially an entire Active Directory domain.
 
 ## Remediation
 
