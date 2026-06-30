@@ -12,13 +12,12 @@
 
 The following methodology was conducted during this assessment:
 
-    Enumeration
-    Vulnerability Identification
-    Initial Access
-    Privilege Escalation
-    Post Exploitation
-
-    ---
+- Enumeration
+- Vulnerability Identification
+- Initial Access
+- Privilege Escalation
+- Post Exploitation
+---
 ## Enumeration 
 
 Enumeration began with a comprehensive network scan to expose any open ports and sevices and identify attack vectors
