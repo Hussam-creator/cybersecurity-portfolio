@@ -110,7 +110,7 @@ Analyzing '$apr1$oRfRsc/K$UpYpplHDlaemqseM39Ugg0'
 ```
 `Hashcat` was then used to crack the hash, revealing the plaintext password
 
-![password(Images/password.png)
+![password](Images/password.png)
 
 ## Initial Access
 
