@@ -17,6 +17,7 @@ The following methodology was conducted during this assessment:
 - Initial Access
 - Privilege Escalation
 - Post Exploitation
+
 ---
 ## Enumeration 
 
