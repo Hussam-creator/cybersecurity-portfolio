@@ -1,16 +1,8 @@
 # My Cybersecurity Portfolio
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                                                             │
-│                 Hussam Saeed                                │
-│                                                             │
-│          Penetration Tester | AD | Web Security             │
-│                                                             │
-│        HTB • OffSec PG • Notes • Reports • Labs             │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
-```
+# 👋 Hussam Saeed
+
+> Penetration Tester | OSCP Candidate | Active Directory | Web Application Security
 
 Welcome to my cybersecurity portfolio.
 
