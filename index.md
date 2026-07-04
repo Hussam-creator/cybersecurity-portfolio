@@ -48,9 +48,9 @@ Professional-style reports documenting findings, impact, and remediation.
 
 ## 🔗 Connect
 
-[LinkedIn](https://www.linkedin.com/in/hussam-saeed)
-[GitHub Repository](https://github.com/Hussam-creator/cybersecurity-portfolio)
-[HackTheBox](https://app.hackthebox.com/public/users/2475852)
+- [LinkedIn](https://www.linkedin.com/in/hussam-saeed)
+- [GitHub Repository](https://github.com/Hussam-creator/cybersecurity-portfolio)
+- [HackTheBox](https://app.hackthebox.com/public/users/2475852)
 
 ---
 
