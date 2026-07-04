@@ -17,7 +17,7 @@ SSH
 ```
 MySQL
 ```
-hydra [-L users.txt or -l user_name] [-P pass.txt or -p password] -f [-S port] mysql://X.X.X.X
+hydra [-L users.txt or -l user_name] [-P pass.txt or -p password] -f [-s port] mysql://X.X.X.X
 ```
 FTP 
 ```
