@@ -4,7 +4,6 @@
 
 > Penetration Tester | OSCP Candidate | Active Directory | Web Application Security
 
-Welcome to my cybersecurity portfolio.
 
 ## 👤 About Me
 
