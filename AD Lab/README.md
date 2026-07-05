@@ -7,7 +7,7 @@ The lab simulates a small enterprise network and is designed to replicate common
 
 ## Purpose
 
-The primary objectives of this lab are to:
+The primary objectives of this lab is to:
 
 Develop and refine Active Directory enumeration techniques.
 Practise privilege escalation and lateral movement scenarios.
