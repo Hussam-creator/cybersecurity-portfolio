@@ -158,7 +158,7 @@ This target was successfully compromised through exploiting various vulnerabilit
 
 ## Lessons Learned
 
-This machine highlighted the importance of post-compromise manual enumeration. It also demonstrated the risks 0f insecure file handling and the impact of publicly available proof-of-concepts
+This machine highlighted the importance of post-compromise manual enumeration. It also demonstrated the risks of insecure file handling and the impact of publicly available proof-of-concepts
 
 ## Remediation
 
