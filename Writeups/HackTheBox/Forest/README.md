@@ -112,7 +112,7 @@ Invoke-BloodHound -CollectionMethod All -OutputDirectory C:\Users\svc-alfresco\D
 
 The following attack path has been discovered:
 
-
+```
 svc-alfresco
     ↓ MemberOf
 Account Operators
@@ -120,7 +120,7 @@ Account Operators
 Exchange Windows Permissions
     ↓ WriteDACL
 HTB.LOCAL
-
+```
 
 A new domain user (`Backdoor`) was created and added to the `Exchange Windows Permissions` group. Since this group has `WriteDACL` permissions over the domain object, the account was able to modify the domain ACL. `PowerView` was then used to grant the account the replication permissions (`DS-Replication-Get-Changes` and `DS-Replication-Get-Changes-All`) required to perform a DCSync attack and retrieve credentials from the domain controller.
 ```
