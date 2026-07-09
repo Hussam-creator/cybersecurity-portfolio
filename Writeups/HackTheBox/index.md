@@ -2,6 +2,7 @@
 
 ## Machines
 
+- [Forest](Forest/)
 - [Active](Active/)
 - [Broker](Broker/)
 - [Aero](Aero/)
