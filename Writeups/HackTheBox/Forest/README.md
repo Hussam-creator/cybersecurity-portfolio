@@ -144,6 +144,22 @@ evil-winrm -i 10.129.95.210 -u Administrator -H 32693b11e6aa90eb43d32c72a07ceea6
 ```
 ## Conclusion
 
+## Conclusion
+
+This assessment demonstrated how multiple small misconfigurations within an Active Directory environment can be chained together to achieve full domain compromise. Starting with anonymous user enumeration, an AS-REP roasting vulnerability exposed valid credentials, which provided initial access via WinRM. Further privilege analysis revealed excessive permissions assigned through Active Directory group memberships, ultimately allowing DCSync rights to be granted and the Administrator account to be compromised.
+
 ## Lessons Learned
 
+- Anonymous user enumeration can expose valuable information, including valid domain usernames.
+- Accounts configured without Kerberos pre-authentication are vulnerable to AS-REP roasting, allowing password hashes to be cracked offline.
+- Tools such as BloodHound are invaluable for identifying complex privilege escalation paths that may not be immediately obvious.
+- Misconfigured Active Directory permissions, particularly WriteDACL and GenericAll, can provide a direct path to domain compromise.
+- DCSync is a powerful post-exploitation technique that allows an attacker to retrieve domain password hashes without interacting directly with the NTDS.dit database.
+
 ## Remediation
+
+- Disable anonymous enumeration where possible and restrict unnecessary information disclosure.
+- Ensure all user accounts require Kerberos pre-authentication unless there is a legitimate operational requirement.
+- Enforce strong, unique passwords to reduce the risk of offline password cracking.
+- Regularly audit Active Directory permissions and remove unnecessary delegated privileges such as GenericAll and WriteDACL.
+- Apply the principle of least privilege when assigning group memberships, particularly for privileged groups such as Account Operators and Exchange Windows Permissions.
