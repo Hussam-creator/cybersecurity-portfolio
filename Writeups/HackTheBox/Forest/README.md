@@ -95,4 +95,23 @@ evil-winrm -i 10.129.95.210 -u svc-alfresco -p s3rvice
 Now that intial access has been obtained, user privileges were enumerated to discover any potential security misconfigurations. In this case the user `svc-alfresco` is a member of th Account Operators group, a highly privileged group that can be exploited to further abuse group and user privileges ultimately leading to Domain compromise.  
 
 
+This can be achieved because `Account Operators` can modify user objects for any user that is not a member of one of the protected groups: Administrators, Domain Admins and Enterprise Admins
+
+![privs](Images/privs.png)
+
+`Bloodhound`, a powerfull enumeration tool, can be utilised to map the attack path
+
+### BloodHound
+
+The BloodHound injestor `SharpHound` was used to collect the Active Directory information
+```
+Import-Module .\SharpHound.ps1
+Invoke-BloodHound -CollectionMethod All -OutputDirectory C:\Users\svc-alfresco\Desktop -OutputPrefix "collector"
+```
+
+![bloodhound](Images/bloodhound.png)
+
+The following attack path has been discovered;
+
+svc-alfresco -> Account Operators (member of) -> Account Operators has generic all permissions to Exchange Windows Permissions -> Exchange Windows Permissions has WriteDacl permissions to HTB.LOCAL
 
