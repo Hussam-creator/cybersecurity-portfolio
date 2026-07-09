@@ -111,7 +111,7 @@ Invoke-BloodHound -CollectionMethod All -OutputDirectory C:\Users\svc-alfresco\D
 
 ![bloodhound](Images/bloodhound.png)
 
-The following attack path has been discovered;
+The following attack path has been discovered:
 
 
 svc-alfresco -> Account Operators (member of) -> Account Operators has generic all permissions to Exchange Windows Permissions -> Exchange Windows Permissions has WriteDacl permissions to HTB.LOCAL
