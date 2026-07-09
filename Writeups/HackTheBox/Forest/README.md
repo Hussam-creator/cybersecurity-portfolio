@@ -65,7 +65,7 @@ Upon discovering a list of users, I attempted AS-REP Roasting to identify any ac
 impacket-GetNPUsers htb.local/ -dc-ip 10.129.95.210 -no-pass -usersfile users
 ```
 
-![as-rep](Images/as-rep)
+![as-rep](Images/as-rep.png)
 
 ## Initial Access
 
@@ -78,12 +78,21 @@ hashcat -m 18200 alfresco.hash /usr/share/wordlists/rockyou.txt
 
 With the plaintext password revealed, the credentials were validated against the WinRM service
 ```
-hashcat -m 18200 alfresco.hash /usr/share/wordlists/rockyou.txt
+netexec winrm 10.129.95.210 -u 'svc-alfresco' -p 's3rvice' 
 ```
 
 ![verify](Images/verify.png)
 
+Following successful authentication as the `svc-alfresco` account, `evil-winrm` was used to obtain an interactive shell and obtain the first flag
+```
+evil-winrm -i 10.129.95.210 -u svc-alfresco -p s3rvice
+```
 
+![winrm](Images/winrm.png)
+
+## Privilege Escalation
+
+Now that intial access has been obtained, user privileges were enumerated to discover any potential security misconfigurations. In this case the user `svc-alfresco` is a member of th Account Operators group, a highly privileged group that can be exploited to further abuse group and user privileges ultimately leading to Domain compromise.  
 
 
 
