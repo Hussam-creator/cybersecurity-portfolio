@@ -6,6 +6,7 @@
 - [LFI](LFI.md)
 - [RFI](RFI.md)
 - [WebDAV](WebDav.md)
+- [SQLi](SQLi.md)
 
  ---
 
