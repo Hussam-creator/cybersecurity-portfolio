@@ -17,8 +17,13 @@ This page provides a quick overview of some of the techniques currently tested w
 ## NTLM Credential Capture & Cracking
 
 Using Responder, an attacker can capture NetNTLMv2 authentication hashes when a user is tricked into authenticating to a malicious service.
+
+### Start Responder
 ```
 sudo responder -I eth0 -dwv
 ```
+### Identify Captured Hash
 
 ![responder](Images/responder.png)
+
+### Identify Hash Type
