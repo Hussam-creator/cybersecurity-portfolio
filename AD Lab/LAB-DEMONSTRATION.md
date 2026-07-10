@@ -72,6 +72,8 @@ An authentication request was triggered, causing the victim machine to attempt a
 
 ![trigger](Images/trigger.png)
 
+> Note: In this lab environment, the authentication request was triggered manually for demonstration purposes. In a real-world scenario, attackers rely on techniques such as social engineering to cause a user to authenticate. This could be achieved by clicking on malicious links, open specially crafted files, or accessing compromised resources. 
+
 ### Identify Captured Hash
 
 Responder captured a NetNTLMv2 authentication hash.
