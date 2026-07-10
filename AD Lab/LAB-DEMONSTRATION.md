@@ -8,7 +8,7 @@ The purpose of this section is not to provide an exhaustive list of all techniqu
 
 A single compromised credential can often become the starting point for further attacks, potentially leading to increased privileges, access to additional systems, and ultimately compromise of the wider domain environment.
 
-The examples below demonstrate a selection of techniques including credential capture, password cracking, remote access, credential extraction, password spraying, service account attacks, and pass-the-hash authentication.
+The examples below demonstrate a selection of techniques including credential capture, password cracking, remote access, credential extraction, password spraying, and pass-the-hash authentication.
 
 > Note: This is a small demonstration of the lab's current capabilities. I intend to expand it further by adding more users, machines, network segmentation for pivoting practice, and additional vulnerabilities to better simulate a real enterprise environment.
 
@@ -192,7 +192,7 @@ evil-winrm -i 192.168.141.129 -u SQLService -H f4ab68f27303bcb4024650d8fc5f973a
 
 # Future Lab Expansion
 
-The current environment provides a foundation for practising Active Directory attacks. Future improvements will include:
+The current environment provides a foundation for practicing Active Directory attacks. Future improvements will include:
 
 - Additional domain users with different privilege levels
 - Multiple domain-joined machines for lateral movement scenarios
