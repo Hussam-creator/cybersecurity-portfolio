@@ -40,6 +40,6 @@ The environment was built by following the excellent walkthrough created by TCM 
 
 | Machine | Role | Operating System |
 |----------|-------|------------------|
-| DC01 | Domain Controller | Windows Server 2019 |
-| WIN10-01 | Workstation | Windows 11 |
+| WINDOWS-DC | Domain Controller | Windows Server 2019 |
+| CLIENT1 | Workstation | Windows 11 |
 | KALI | Attacker Machine | Kali Linux |
