@@ -7,7 +7,7 @@ The lab simulates a small enterprise network and is designed to replicate common
 
 ## Purpose
 
-The primary objectives of this lab is to:
+The primary objectives of this lab are to:
 
 Develop and refine Active Directory enumeration techniques.
 Practise privilege escalation and lateral movement scenarios.
@@ -27,6 +27,24 @@ This lab is used to explore a range of Active Directory security concepts, inclu
 - BloodHound analysis
 - Privilege escalation
 - Lateral movement
+
+## Lab Demonstrations
+
+The following page provides examples of security testing scenarios performed within this Active Directory lab environment.
+
+These demonstrations cover practical examples of:
+
+- Credential capture and cracking
+- NTLM authentication attacks
+- SMB and WinRM remote access
+- Credential dumping
+- Password spraying
+- Pass-the-Hash attacks
+- Active Directory enumeration
+
+> Note: These examples represent a small selection of the techniques currently tested within the lab. The environment is continuously being expanded with additional users, machines, network segmentation for pivoting practice, and further Active Directory vulnerabilities.
+
+[View Lab Demonstrations](./LAB-DEMONSTRATION.md)
 
 ## Disclaimer
 
