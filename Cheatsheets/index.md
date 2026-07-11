@@ -4,13 +4,6 @@ This section contains penetration testing notes.
 
 ---
 
-## Areas Covered
-
-- Active Directory
-- Web Applications
-
----
-
 ## Sections
 
 - 📁 [Active Directory](./Active%20Directory/)
