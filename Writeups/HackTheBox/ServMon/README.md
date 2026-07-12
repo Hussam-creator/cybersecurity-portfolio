@@ -154,7 +154,7 @@ During privilege escalation enumeration, the previously identified NSClient++ se
 
 Examining the configuration file revealed the web interface authentication password and the allowed hosts, which in this case is restricted to the local machine(`127.0.0.1`) 
 
-![config](/Images/config.png)
+![config](Images/config.png)
 
 The installed version was identified and since the **NSClient++** interface was only accessible locally, an SSH local port forward was configured
 ```
