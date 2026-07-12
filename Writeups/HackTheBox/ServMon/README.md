@@ -92,7 +92,7 @@ PORT      STATE SERVICE       VERSION
 ```
 
 Key Findings:
-- Port 443 - HTTPS
+- Port 8443 - HTTPS
 - Port 80 - HTTP
 - Port 22 - SSH
 - Port 21 - FTP
