@@ -101,7 +101,7 @@ Key Findings:
 Since anonymous access was enabled for the FTP service, this is were I began my port enumeration. Successful authentication to this service can expose potential users, confidential information and even lead to remote code executioni if we are able to upload a web shell to a server document root.
 ```
 ftp 10.129.227.77
-``
+```
 
 ![anon](Images/anon.png)
 
