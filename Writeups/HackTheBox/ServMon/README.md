@@ -117,7 +117,7 @@ Although the FTP service revealed useful information, no immediate access was ob
 
 Port 8443
 
-![nsclient](Images/nclient.png)
+![nsclient](Images/nsclient.png)
 
 Port 80
 
