@@ -1,4 +1,12 @@
-# Windows
+# Resource-Based Constrained Delegation
+
+## Overview
+
+Resource-Based Constrained Delegation (RBCD) is an Active Directory attack that allows an attacker to configure a computer object to trust another controlled account for delegation. By abusing the msDS-`AllowedToActOnBehalfOfOtherIdentity` attribute, an attacker with write permissions over a target computer can impersonate privileged users (such as Domain Admins) to that host using Kerberos S4U extensions, often resulting in local administrator or SYSTEM access.
+
+---
+
+## Windows
 
 #### Adding Computer Object 
 
@@ -57,7 +65,7 @@ export KRB5CCNAME=ticket.ccache
 impacket-psexec resourced.local/Administrator@ResourceDC.resourced.local -no-pass -k
 ```
 
-# Linux
+## Linux
 
 #### Add attacker controlled machine on domain
 ```
