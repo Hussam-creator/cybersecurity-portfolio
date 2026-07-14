@@ -188,7 +188,7 @@ After switching to the `cassie` user, the previously identified SSH private key 
 ```
 ![root](Images/root.png)
 
-## Conlusion
+## Conclusion
 
 This assessment involved exploiting multiple vulnerabilities to gain full system compromise. A directory traversal vulnerability allowed sensitive files to be read from the system, including the FreeSWITCH configuration file containing service credentials. These credentials were used to access the FreeSWITCH Event Socket Interface, where the vulnerable service version was identified and exploited to achieve remote code execution.
 
