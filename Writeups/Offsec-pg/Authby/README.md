@@ -5,6 +5,7 @@
 ## Overview
 
 - Difficulty: Intermediate
+- Community Rating: Hard
 - Platform: Windows
 - Skills Demonstrated: FTP Enumeration, Password Hash Cracking, Web Shell Deployment, Windows Privilege Escalation, Kernel Exploitation
 
