@@ -140,3 +140,5 @@ evil-winrm -i 192.168.226.175 -u L.Livingstone -H 19a3a7550ce8c505c2d46b5e39d6f8
 
 ![winrm](Images/winrm.png)
 
+## Privilege Escalation
+
