@@ -86,6 +86,7 @@ index: 0xf71 RID: 0x456 acb: 0x00020010 Account: R.Robinson     Name: (null)    
 index: 0xf6f RID: 0x454 acb: 0x00020010 Account: S.Swanson      Name: (null)    Desc: Military Vet now cybersecurity specialist
 index: 0xf6e RID: 0x453 acb: 0x00000210 Account: V.Ventz        Name: (null)    Desc: New-hired, reminder: HotelCalifornia194!
 ```
+
 Using these credentials, I was able to successfully authenticate to the SMB service using `smbclient` to discover any sensitive information.
 
 ![smbclient](Images/smbclient.png)
