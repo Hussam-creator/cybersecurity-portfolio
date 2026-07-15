@@ -1,5 +1,7 @@
 # Offsec Proving Grounds - Resourced
 
+![resourced](Images/resourced.png)
+
 ## Overview 
 
 - Difficulty: Intermediate
