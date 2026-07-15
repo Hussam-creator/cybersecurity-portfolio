@@ -20,7 +20,7 @@ This lab assessment followed the methodoloy below:
 ---
 ## Enumeration 
 
-As with any engagement, I began with a `nmap` port scan to identify accessible ports and services
+As with any engagement, I began with an `nmap` port scan to identify accessible ports and services
 ```
 nmap 192.168.226.175 -sCV -A -p-
 ```
