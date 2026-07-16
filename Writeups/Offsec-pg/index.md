@@ -2,6 +2,7 @@
 
 ## Machines
 
+- [Resourced](Resourced/)
 - [Authby](Authby/)
 - [Clue](Clue/)
 
