@@ -144,3 +144,42 @@ evil-winrm -i 192.168.226.175 -u L.Livingstone -H 19a3a7550ce8c505c2d46b5e39d6f8
 
 ## Privilege Escalation
 
+Once initial acess had been achieved, domain data was collected using SharHound and ingested into BloodHound. Analysis of the BloodHound graph revealed that the controlled user, `L.Livingstone`, had GenericAll permissions over the `ResourceDC` computer object.
+```
+Invoke-BloodHound -CollectionMethod All -OutputDirectory C:\Users\L.Livingstone\Documents -OutputPrefix "collector"
+```
+
+![bloodhound](Images/bloodhound.png)
+
+This type of permission allows Resource-Based Constrained Delegation (RBCD) to be configured, a path to privilege escalation. 
+
+### Resource-Based Constrained Delegation
+
+**Resource-Based Constrained Delegation (RBCD)** specifies which service accounts or systems are permitted to act on behalf of other users. This is controlled by the `msDS-AllowedToActOnBehalfOfOtherIdentity` attribute. Since the compromised user `L.Livingstone` had `GenericAll` permissoins, it is possible to modify this attribute, ultimately impersonating a privileged user such as `Administrator`.
+
+The attack was performed using the following steps:
+
+1. Create a controlled machine account within the domain.
+2. Configure the `msDS-AllowedToActOnBehalfOfOtherIdentity` attribute on the `ResourceDC` computer object.
+3. Use `Rubeus` to perform a S4U attack, requesting a Kerberos ticket on behalf of the `Administrator` account.
+4. Convert the ticket from `.kirbi` format to `.ccache` format for use with Impacket tools.
+5. Authenticate to the target using the delegated Administrator ticket.
+
+1. Creating a controlled computer object
+
+The tool `Powermad` was used to create a new controlled machine withtin the domain
+```
+Import-Module .\Powermad.ps1
+New-MachineAccount -MachineAccount testmachine -Password $(ConvertTo-SecureString 'password' -AsPlainText -Force) -Verbose
+```
+
+![new_machine](Images/new_machine.png)
+
+Confirm with PowerShell
+```
+Get-ADComputer -Identity testmachine
+```
+
+![add_machine]{Images/add_machine.png)
+
+2. Configure the attribute on the `ResourceDC` computer object
