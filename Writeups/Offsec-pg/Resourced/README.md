@@ -26,7 +26,8 @@ As with any engagement, I began with an `nmap` port scan to identify accessible 
 ```
 nmap 192.168.226.175 -sCV -A -p-
 ```
-```Starting Nmap 7.95 ( https://nmap.org ) at 2025-07-05 12:21 BST
+```
+Starting Nmap 7.95 ( https://nmap.org ) at 2025-07-05 12:21 BST
 Nmap scan report for 192.168.226.175
 Host is up (0.017s latency).
 Not shown: 65514 filtered tcp ports (no-response)
