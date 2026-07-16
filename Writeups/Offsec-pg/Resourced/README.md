@@ -11,7 +11,7 @@
 
 ## Methodology
 
-This lab assessment followed the methodoloy below:
+This lab assessment followed the methodology below:
 
 - Enumeration
 - Credential Discovery
@@ -64,11 +64,11 @@ PORT      STATE SERVICE       VERSION
 
 Key Findings:
 - Accessible ports DNS (53), Kerberos (88), and LDAP (389) indicate the target is an Active Directory Domain Controller
-- Port 445 (SMB)
-- port 3389 (RDP)
+- Port 445 (SMB), allowing further enumeration of shares and domain information.
+- port 3389 (RDP) was available for remote access.
 - port 5985 (WinRM)
 
-After a successfull port scan identifying the open ports, further enumeration was peformed using `Enum4linx` to query the SMB service for potential shares and users.
+After a successful port scan identifying the open ports, further enumeration was performed using `Enum4linux` to query the SMB service for potential shares and users.
 ```
 enum4linux 192.168.226.175
 ```
@@ -93,7 +93,7 @@ Using these credentials, I was able to successfully authenticate to the SMB serv
 
 ![smbclient](Images/smbclient.png)
 
-After verify the credentials found were valid and authentication was obtained, we find a non default share `Password Audit`. Further investigation into the share reveals two directories: `Active Directory` and `registry`, which contained the `SECURITY`, `SYSTEM`, and `ntds.dit` files. 
+After verifying the credentials found were valid and authentication was obtained, we find a non default share `Password Audit`. Further investigation into the share reveals two directories: `Active Directory` and `registry`, which contained the `SECURITY`, `SYSTEM`, and `ntds.dit` files. 
 
 ![password_audit](Images/password_audit.png)
 
@@ -101,7 +101,7 @@ After verify the credentials found were valid and authentication was obtained, w
 
 ## Credential Discovery
 
-By utilizing the Impacket tool `secretsdump`, we can extract the local hashes for the target host as we now have a copy of the Active Directory database (`ntds.dit`).
+By utilizing the Impacket tool `secretsdump`, we can extract the domain password hashes for the target host as we now have a copy of the Active Directory database (`ntds.dit`).
 ```
 impacket-secretsdump -ntds ntds.dit -system SYSTEM LOCAL
 ```
@@ -122,11 +122,11 @@ L.Livingstone:1105:aad3b435b51404eeaad3b435b51404ee:19a3a7550ce8c505c2d46b5e39d6
 ...
 ```
 
-The dump succesfully recovered NTLM hashes for multiple domain users, which can be utilized fo techniques such as hash cracking and pass-the-hash.
+The dump succesfully recovered NTLM hashes for multiple domain users, which can be utilised for techniques such as hash cracking and pass-the-hash.
 
 ## Initial Access
 
-Next I deteremine whether the hashes can be used for authentication directly or would require to be cracked. The hashes were saved locally and the sprayed against the previously found users using **Netexec** to identify accounts with remote access privilege.
+Next I determine whether the hashes can be used for authentication directly or would require to be cracked. The hashes were saved locally and the tested against the previously found users using **Netexec** to identify accounts with remote access privilege.
 ```
 netexec winrm 192.168.226.175 -u users.txt -H hashes.txt
 ```
@@ -144,7 +144,7 @@ evil-winrm -i 192.168.226.175 -u L.Livingstone -H 19a3a7550ce8c505c2d46b5e39d6f8
 
 ## Privilege Escalation
 
-Once initial acess had been achieved, domain data was collected using SharHound and ingested into BloodHound. Analysis of the BloodHound graph revealed that the controlled user, `L.Livingstone`, had GenericAll permissions over the `ResourceDC$` computer object.
+Once initial acess had been achieved, domain data was collected using SharpHound and ingested into BloodHound. Analysis of the BloodHound graph revealed that the compromised user, `L.Livingstone`, had GenericAll permissions over the `ResourceDC$` computer object.
 ```
 Invoke-BloodHound -CollectionMethod All -OutputDirectory C:\Users\L.Livingstone\Documents -OutputPrefix "collector"
 ```
@@ -155,7 +155,7 @@ This type of permission allows Resource-Based Constrained Delegation (RBCD) to b
 
 ### Resource-Based Constrained Delegation
 
-**Resource-Based Constrained Delegation (RBCD)** specifies which service accounts or systems are permitted to act on behalf of other users. This is controlled by the `msDS-AllowedToActOnBehalfOfOtherIdentity` attribute. Since the compromised user `L.Livingstone` had `GenericAll` permissoins, it is possible to modify this attribute, ultimately impersonating a privileged user such as `Administrator`.
+**Resource-Based Constrained Delegation (RBCD)** specifies which service accounts or systems are permitted to act on behalf of other users. This is controlled by the `msDS-AllowedToActOnBehalfOfOtherIdentity` attribute. Since the compromised user `L.Livingstone` had `GenericAll` permissions, it is possible to modify this attribute, ultimately impersonating a privileged user such as `Administrator`.
 
 The attack was performed using the following steps:
 
@@ -222,7 +222,7 @@ Rubeus was then used to perform the S4U attack, by requesting a ticket for the `
 
 #### 4. Convert the Kerberos ticket
 
-The Kerberos service ticket generated by Rubeus was exported in Base64-encoded `.kirbi` format. The ticket was first decoded back into its original `.kirbi` format and then converted into `.ccache` format using Impacket's `ticketConverter`.
+The Kerberos service ticket generated by Rubeus was exported in Base64-encoded `.kirbi` format. The ticket was first decoded back into its original `.kirbi` binary format and then converted into `.ccache` format using Impacket's `ticketConverter`.
 ```
 base64 -d ticket.kirbi.encoded > ticket.kirbi
 ```
