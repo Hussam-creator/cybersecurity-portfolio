@@ -165,7 +165,8 @@ The attack was performed using the following steps:
 4. Convert the ticket from `.kirbi` format to `.ccache` format for use with Impacket tools.
 5. Authenticate to the target using the delegated Administrator ticket.
 
-1. Creating a controlled computer object
+
+#### 1. Creating a controlled computer object
 
 The tool `Powermad` was used to create a new controlled machine withtin the domain
 ```
@@ -180,6 +181,6 @@ Confirm with PowerShell
 Get-ADComputer -Identity testmachine
 ```
 
-![add_machine]{Images/add_machine.png)
+![add_machine](Images/add_machine.png)
 
-2. Configure the attribute on the `ResourceDC` computer object
+#### 2. Configure the attribute on the `ResourceDC` computer object
