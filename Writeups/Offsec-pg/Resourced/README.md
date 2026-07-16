@@ -242,3 +242,31 @@ impacket-psexec resourced.local/Administrator@ResourceDC.resourced.local -no-pas
 
 ![system](Images/system.png)
 
+## Conclusion
+
+This assessment demonstrated a complete Active Directory attack chain, beginning with SMB enumeration and credential discovery, followed by hash extraction, authenticated access, and privilege escalation through Resource-Based Constrained Delegation (RBCD).
+
+By leveraging exposed SMB shares and misconfigured delegation permissions, it was possible to escalate privileges from a standard domain user to SYSTEM-level access on the domain controller.
+
+The assessment highlighted the impact of excessive Active Directory permissions and the risks associated with delegation configurations that are not properly restricted.
+
+## Lessons Learned
+
+Resource-Based Constrained Delegation (RBCD) was a new technique for me during this assessment. This machine provided a good opportunity to understand how Kerberos delegation works, specifically how the `msDS-AllowedToActOnBehalfOfOtherIdentity` attribute can be abused when an attacker gains sufficient control over a computer object.
+
+A key takeaway was understanding how individual Active Directory permissions, such as `GenericAll`, can lead to significant privilege escalation opportunities when combined with Kerberos delegation features.
+
+I have documented the complete RBCD attack workflow, including performing the attack entirely from a Linux-based attacker machine, in my Active Directory cheatsheet:
+
+- [Resource-Based Constrained Delegation (RBCD) Cheatsheet](../../../Cheatsheets/Active%20Directory/Privilege%20Escalation/RBCD.md)
+
+## Remediation
+
+
+To mitigate the vulnerabilities identified during this assessment, the following recommendations should be implemented:
+
+- Review and restrict excessive Active Directory permissions, particularly dangerous rights such as `GenericAll` on computer objects.
+- Regularly audit configurations and review the `msDS-AllowedToActOnBehalfOfOtherIdentity` attribute for unexpected entries.
+- Limit which users and computers are permitted to create new computer accounts within the domain.
+- Apply least privilege principles
+- Avoid storing sensitive files such as `ntds.dit` and registry hives in accessible network shares.
