@@ -63,7 +63,7 @@ Key Findings:
 - Port 80 - HTTP (Apache Default Page)
 - Port 6789 - HTTP (Mage Application)
 
-  ### Web Enumeration
+### Web Enumeration
 
-  Web enumeration began with **port 80**, this presented the default Apache page. Further enumeration included inspection of the source code, common files, directories and subdomains, however this did not reveal any useful information and attention shifted to the application hosted on **port 6789**.
+Web enumeration began with **port 80**, this presented the default Apache page. Further enumeration included inspection of the source code, common files, directories and subdomains, however this did not reveal any useful information and attention shifted to the application hosted on **port 6789**.
    
