@@ -121,3 +121,4 @@ Examination of the `zabbix.conf.php` file revealed credentials for the local MyS
 ![credentials](Images/credentials.png)
 
 ### Database Enumeration
+
