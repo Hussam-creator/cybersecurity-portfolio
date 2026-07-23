@@ -73,7 +73,7 @@ This port was discovered to be hosting the application Mage. Manual enumeration 
 
 ![menu](Images/menu.png)
 
-![terminal](Images/termina.png)
+![terminal](Images/terminal.png)
 
 ## Initial Access
 
