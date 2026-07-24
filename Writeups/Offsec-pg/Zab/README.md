@@ -134,3 +134,21 @@ SELECT * FROM users;
 ```
 
 ![hashes](Images/hashes.png)
+
+### Password Cracking 
+
+The hashed password was saved locally and taken offline, then `Hashcat` was used to extract the plaintext password. However, before any attempts could be made, the hash encryption needed to be identified.
+```
+hashid zabbix.hash
+```
+```
+hashcat -h | grep Blowfish
+```
+
+![hashcat](Images/hashcat.png)
+
+```
+hashcat -m 3200 zabbix.hash /usr/share/wordlists/rockyou.txt
+```
+
+![cracked](Images/cracked.png)
