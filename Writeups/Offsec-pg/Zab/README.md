@@ -122,3 +122,15 @@ Examination of the `zabbix.conf.php` file revealed credentials for the local MyS
 
 ### Database Enumeration
 
+Enumerating the databases revealed the `users` table within the `zabbix` database. 
+```
+mysql -u zabbix -pbreadandbuttereater121
+```
+![database](Images/database.png)
+
+Querying this table returned the hashed password for the `admin` account.
+```
+SELECT * FROM users;
+```
+
+![hashes](Images/hashes.png)
