@@ -128,7 +128,7 @@ mysql -u zabbix -pbreadandbuttereater121
 ```
 ![database](Images/database.png)
 
-Querying this table returned the hashed password for the `admin` account.
+Querying this table returned the hashed password for the `Admin` account.
 ```
 SELECT * FROM users;
 ```
@@ -152,3 +152,7 @@ hashcat -m 3200 zabbix.hash /usr/share/wordlists/rockyou.txt
 ```
 
 ![cracked](Images/cracked.png)
+
+## Pivoting
+
+Since these recovered credentials where found in the `zabbix` database, and the internal Zabbix ports **10051** and **10050** were idenitfied earlier in the assessment. I had a strong indication that these credentials could be used to authenticate to the Zabbix web interface. Access to the internal interface was achieved using a **Chisel** tunnel. 
